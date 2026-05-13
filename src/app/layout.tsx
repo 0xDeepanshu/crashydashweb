@@ -11,6 +11,9 @@ export const metadata: Metadata = {
     description: "Own. Race. Earn.",
     type: "website",
   },
+  icons: {
+    icon: "/img/logo.png",
+  },
 };
 
 export default function RootLayout({

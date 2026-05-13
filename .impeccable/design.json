@@ -1,0 +1,202 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-05-14T00:06:00+05:30",
+  "title": "Design System: Crashy Dash",
+  "extensions": {
+    "colorMeta": {
+      "hot-magenta": {
+        "role": "primary",
+        "displayName": "Hot Magenta",
+        "canonical": "#ff4fd8",
+        "tonalRamp": ["#33102b", "#661f56", "#993080", "#cc40ab", "#ff4fd8", "#ff79e0", "#ff99e8", "#ffccf3"]
+      },
+      "ultraviolet": {
+        "role": "secondary",
+        "displayName": "Ultraviolet",
+        "canonical": "#6f42ff",
+        "tonalRamp": ["#160d33", "#2d1a66", "#432799", "#5a35cc", "#6f42ff", "#8c6bff", "#a994ff", "#d4c9ff"]
+      },
+      "electric-cyan": {
+        "role": "secondary",
+        "displayName": "Electric Cyan",
+        "canonical": "#35f2ff",
+        "tonalRamp": ["#0b3033", "#163f66", "#1f7d99", "#2abfcc", "#35f2ff", "#5ef5ff", "#8cf8ff", "#c5fcff"]
+      },
+      "reactor-green": {
+        "role": "tertiary",
+        "displayName": "Reactor Green",
+        "canonical": "#7dff72",
+        "tonalRamp": ["#193317", "#33662e", "#4d9945", "#66cc5c", "#7dff72", "#97ff8e", "#b1ffaa", "#d8ffd4"]
+      },
+      "sunset-amber": {
+        "role": "tertiary",
+        "displayName": "Sunset Amber",
+        "canonical": "#ff9966",
+        "tonalRamp": ["#331f14", "#663d29", "#995c3d", "#cc7a52", "#ff9966", "#ffad85", "#ffc2a3", "#ffe0d1"]
+      },
+      "void-black": {
+        "role": "neutral",
+        "displayName": "Void Black",
+        "canonical": "#07010f",
+        "tonalRamp": ["#07010f", "#0f0520", "#170930", "#1f0d40", "#271150", "#3a1d73", "#4d2996", "#6035b9"]
+      },
+      "lavender-white": {
+        "role": "neutral",
+        "displayName": "Lavender White",
+        "canonical": "#f0e6ff",
+        "tonalRamp": ["#302040", "#604080", "#9060c0", "#b080e0", "#c8a0f0", "#d8b8f5", "#e4ccfa", "#f0e6ff"]
+      },
+      "ghost-white": {
+        "role": "neutral",
+        "displayName": "Ghost White",
+        "canonical": "#e0d0ff",
+        "tonalRamp": ["#2d2040", "#5a4080", "#7760a0", "#9480c0", "#b0a0d8", "#c8b8e8", "#d8c8f0", "#e0d0ff"]
+      },
+      "wallet-lilac": {
+        "role": "neutral",
+        "displayName": "Wallet Lilac",
+        "canonical": "#a78bfa",
+        "tonalRamp": ["#211c32", "#433864", "#645496", "#8670c8", "#a78bfa", "#b9a2fb", "#cbb9fc", "#ddd0fd"]
+      }
+    },
+    "typographyMeta": {
+      "display": { "displayName": "Display", "purpose": "Hero title and final CTA only. Maximum two instances on the entire page." },
+      "headline": { "displayName": "Headline", "purpose": "Section headings. One accent-colored word with text-shadow glow per heading." },
+      "title": { "displayName": "Title", "purpose": "Card headings, step titles, world names. All-caps, tracking-wide." },
+      "body": { "displayName": "Body", "purpose": "Card descriptions, section subtitles. Font-light, variable opacity by context." },
+      "label": { "displayName": "Label", "purpose": "Stat labels, token symbols, technical identifiers. All-caps, monospace." }
+    },
+    "shadows": [
+      { "name": "ambient-aura", "value": "0 0 30px rgba(111,66,255,0.08), 0 8px 32px rgba(0,0,0,0.4)", "purpose": "Resting state on glass panels. Atmospheric depth without drawing attention." },
+      { "name": "hover-bloom", "value": "0 0 40px rgba(accent,0.15), 0 12px 40px rgba(0,0,0,0.5)", "purpose": "Card hover state. Accent color bleeds outward, deep shadow anchors." },
+      { "name": "neon-halo", "value": "0 0 15px rgba(255,79,216,0.5), 0 0 30px rgba(255,79,216,0.2)", "purpose": "Button resting state. Dual-layer glow with tight bright core and diffuse outer ring." },
+      { "name": "neon-halo-intense", "value": "0 0 25px rgba(255,79,216,0.7), 0 0 50px rgba(255,79,216,0.3)", "purpose": "Button hover state. Intensified glow on lift." },
+      { "name": "button-bevel", "value": "inset 0 -3px 0 rgba(0,0,0,0.2)", "purpose": "Physical bevel on btn-neon bottom edge. Creates arcade button tactility." },
+      { "name": "inner-highlight", "value": "inset 0 1px 0 rgba(255,255,255,0.04)", "purpose": "Glass panel inner highlight. Ghost bevel at the top edge." },
+      { "name": "stat-glow", "value": "0 0 20px rgba(accent,0.4)", "purpose": "Stat card numbers. Each value glows in its own accent color via text-shadow." }
+    ],
+    "motion": [
+      { "name": "lenis-scroll", "value": "duration: 1.2, easing: exponential ease-out", "purpose": "Global smooth scroll via Lenis. All scroll interactions pass through this." },
+      { "name": "scrub-timeline", "value": "scrub: 0.6", "purpose": "GSAP ScrollTrigger scrub value for hero pinned timeline. Synced with Lenis." },
+      { "name": "entrance-ease", "value": "power3.out", "purpose": "Standard entrance easing. Fast start, gentle settle. Used on all scroll-triggered reveals." },
+      { "name": "exit-ease", "value": "power3.in", "purpose": "Standard exit easing. Gentle start, fast exit. Used when scroll layers leave." },
+      { "name": "hover-ease-in", "value": "power2.out", "purpose": "Hover enter easing. 0.3-0.4s duration. Scale and lift." },
+      { "name": "hover-ease-out", "value": "elastic.out(1, 0.5)", "purpose": "Hover leave easing. 0.5-0.6s duration. Slight overshoot bounce for arcade tactility." },
+      { "name": "char-entrance", "value": "back.out(1.7)", "purpose": "Character-level title entrance. Each character pops in with overshoot." },
+      { "name": "icon-bounce", "value": "elastic.out(1, 0.4)", "purpose": "Feature icon entrance. Elastic bounce-in from scale 0." },
+      { "name": "btn-overshoot", "value": "cubic-bezier(0.34, 1.56, 0.64, 1)", "purpose": "Button hover transition. CSS-only overshoot curve." },
+      { "name": "stagger-fast", "value": "0.04s", "purpose": "Scroll layer line stagger. Rapid successive reveals." },
+      { "name": "stagger-medium", "value": "0.12s", "purpose": "Card and step stagger. Visible cascade." },
+      { "name": "reveal-smooth", "value": "cubic-bezier(0.16, 1, 0.3, 1)", "purpose": "CSS-only reveal transition. Used on .reveal-up utility." }
+    ],
+    "breakpoints": [
+      { "name": "sm", "value": "640px" },
+      { "name": "md", "value": "768px" },
+      { "name": "lg", "value": "1024px" }
+    ]
+  },
+  "components": [
+    {
+      "name": "Primary Button",
+      "kind": "button",
+      "refersTo": "button-primary",
+      "description": "Hot Magenta neon CTA with shine sweep animation. The main conversion action.",
+      "html": "<button class=\"ds-btn-primary\">PLAY NOW</button>",
+      "css": ".ds-btn-primary { position: relative; display: inline-flex; align-items: center; justify-content: center; gap: 0.5rem; padding: 0.85rem 2.2rem; font-family: 'Space Grotesk', 'Inter', sans-serif; font-size: 0.95rem; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; background: linear-gradient(135deg, #ff4fd8, #ff6be5); color: #07010f; border: none; border-radius: 10px; cursor: pointer; overflow: hidden; transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1); box-shadow: 0 0 15px rgba(255,79,216,0.5), 0 0 30px rgba(255,79,216,0.2), inset 0 -3px 0 rgba(0,0,0,0.2); } .ds-btn-primary:hover { transform: translateY(-2px) scale(1.03); box-shadow: 0 0 25px rgba(255,79,216,0.7), 0 0 50px rgba(255,79,216,0.3), inset 0 -3px 0 rgba(0,0,0,0.3); } .ds-btn-primary:active { transform: translateY(1px) scale(0.98); } .ds-btn-primary:focus-visible { outline: 2px solid #ff4fd8; outline-offset: 3px; }"
+    },
+    {
+      "name": "Outline Button",
+      "kind": "button",
+      "refersTo": "button-outline",
+      "description": "Electric Cyan ghost button for secondary actions.",
+      "html": "<button class=\"ds-btn-outline\">CONNECT WALLET</button>",
+      "css": ".ds-btn-outline { position: relative; display: inline-flex; align-items: center; justify-content: center; gap: 0.5rem; padding: 0.85rem 2.2rem; font-family: 'Space Grotesk', 'Inter', sans-serif; font-size: 0.95rem; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; background: transparent; color: #35f2ff; border: 2px solid rgba(53,242,255,0.5); border-radius: 10px; cursor: pointer; overflow: hidden; transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1); } .ds-btn-outline:hover { background: rgba(53,242,255,0.08); transform: translateY(-2px) scale(1.03); box-shadow: 0 0 25px rgba(53,242,255,0.3); } .ds-btn-outline:focus-visible { outline: 2px solid #35f2ff; outline-offset: 3px; }"
+    },
+    {
+      "name": "Wallet Button",
+      "kind": "button",
+      "refersTo": "button-wallet",
+      "description": "Wallet Lilac variant of outline button. Signals safe secondary action.",
+      "html": "<button class=\"ds-btn-wallet\"><svg width=\"18\" height=\"18\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\"><rect x=\"2\" y=\"6\" width=\"20\" height=\"14\" rx=\"2\"/><path d=\"M2 10h20\"/><circle cx=\"17\" cy=\"15\" r=\"1.5\" fill=\"currentColor\"/></svg> CONNECT WALLET</button>",
+      "css": ".ds-btn-wallet { position: relative; display: inline-flex; align-items: center; justify-content: center; gap: 0.5rem; padding: 0.85rem 2.2rem; font-family: 'Space Grotesk', 'Inter', sans-serif; font-size: 0.95rem; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; background: transparent; color: #a78bfa; border: 2px solid rgba(167,139,250,0.4); border-radius: 10px; cursor: pointer; transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1); } .ds-btn-wallet:hover { background: rgba(167,139,250,0.08); box-shadow: 0 0 25px rgba(167,139,250,0.25); color: #c4b5fd; } .ds-btn-wallet:focus-visible { outline: 2px solid #a78bfa; outline-offset: 3px; }"
+    },
+    {
+      "name": "Glass Panel",
+      "kind": "card",
+      "refersTo": "panel-glass",
+      "description": "Frosted glass container for feature cards and blockchain cards. Neon edge seam at top.",
+      "html": "<div class=\"ds-panel-glass\"><div class=\"ds-panel-icon\">⚡</div><h3 class=\"ds-panel-title\">MPP PAYMENTS</h3><p class=\"ds-panel-desc\">Machine Payment Protocol for instant, gasless micro-transactions.</p></div>",
+      "css": ".ds-panel-glass { position: relative; background: rgba(7,1,15,0.5); backdrop-filter: blur(24px) saturate(180%); border: 1px solid rgba(255,79,216,0.12); border-radius: 16px; box-shadow: 0 0 30px rgba(111,66,255,0.08), 0 8px 32px rgba(0,0,0,0.4), inset 0 1px 0 rgba(255,255,255,0.04); padding: 1.75rem; overflow: hidden; transition: border-color 0.3s ease, box-shadow 0.4s ease; } .ds-panel-glass::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 1px; background: linear-gradient(90deg, transparent, rgba(255,79,216,0.4), transparent); } .ds-panel-glass:hover { border-color: rgba(111,66,255,0.35); box-shadow: 0 0 40px rgba(111,66,255,0.15), 0 12px 40px rgba(0,0,0,0.5); } .ds-panel-icon { font-size: 2.5rem; margin-bottom: 1.25rem; } .ds-panel-title { font-family: 'Space Grotesk', sans-serif; font-size: 1.125rem; font-weight: 700; color: #ffffff; letter-spacing: 0.04em; margin-bottom: 0.5rem; } .ds-panel-desc { font-family: 'Inter', sans-serif; font-size: 0.875rem; font-weight: 300; color: rgba(255,255,255,0.45); line-height: 1.625; }"
+    },
+    {
+      "name": "Badge Pill",
+      "kind": "chip",
+      "refersTo": "badge-pill",
+      "description": "Ghost-bordered status pill with emoji icon. Used in hero scroll layers and feature highlights.",
+      "html": "<span class=\"ds-badge\"><span class=\"ds-badge-icon\">⚡</span> Instant Settlements</span>",
+      "css": ".ds-badge { display: inline-flex; align-items: center; gap: 0.45rem; padding: 0.55rem 1.1rem; border-radius: 999px; font-family: 'Space Grotesk', 'Inter', sans-serif; font-size: 0.85rem; font-weight: 500; color: #e0d0ff; background: rgba(111,66,255,0.06); border: 1px solid rgba(111,66,255,0.2); backdrop-filter: blur(8px); transition: all 0.3s ease; } .ds-badge:hover { background: rgba(111,66,255,0.12); border-color: rgba(111,66,255,0.35); transform: translateY(-1px); } .ds-badge-icon { font-size: 1rem; }"
+    },
+    {
+      "name": "Stat Card",
+      "kind": "card",
+      "refersTo": "stat-card",
+      "description": "Compact metric display with accent-colored number and monospace label.",
+      "html": "<div class=\"ds-stat-card\"><div class=\"ds-stat-value\" style=\"color: #ff4fd8; text-shadow: 0 0 20px rgba(255,79,216,0.4)\">$2.4M</div><div class=\"ds-stat-label\">VOLUME TRADED</div></div>",
+      "css": ".ds-stat-card { background: rgba(7,1,15,0.6); backdrop-filter: blur(12px); border: 1px solid rgba(111,66,255,0.12); border-radius: 14px; padding: 1.5rem; text-align: center; transition: all 0.3s ease; } .ds-stat-card:hover { border-color: rgba(111,66,255,0.3); transform: translateY(-2px); box-shadow: 0 8px 24px rgba(111,66,255,0.1); } .ds-stat-value { font-family: 'Space Grotesk', sans-serif; font-size: 1.875rem; font-weight: 900; } .ds-stat-label { font-family: 'JetBrains Mono', monospace; font-size: 0.75rem; color: rgba(255,255,255,0.35); margin-top: 0.375rem; letter-spacing: 0.06em; text-transform: uppercase; }"
+    },
+    {
+      "name": "Category Badge",
+      "kind": "chip",
+      "refersTo": "badge-pill",
+      "description": "Scroll layer category indicator with pulse dot or icon. Identifies each hero scroll phase.",
+      "html": "<span class=\"ds-category-badge\"><span class=\"ds-pulse-dot\"></span> MACHINE PAYMENT PROTOCOL</span>",
+      "css": ".ds-category-badge { display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.375rem 1rem; border-radius: 999px; font-family: 'Space Grotesk', sans-serif; font-size: 0.875rem; font-weight: 500; background: rgba(111,66,255,0.12); border: 1px solid rgba(111,66,255,0.35); color: #a78bfa; } .ds-pulse-dot { width: 0.5rem; height: 0.5rem; border-radius: 50%; background: #7dff72; animation: ds-pulse 2s ease-in-out infinite; } @keyframes ds-pulse { 0%, 100% { opacity: 0.6; } 50% { opacity: 1; } }"
+    }
+  ],
+  "narrative": {
+    "northStar": "The Neon Runway",
+    "overview": "The visual system is built around the feeling of racing through illuminated lanes at night. Every surface is dark, every accent is a streak of light. The page scrolls like a game trailer: cinematic darkness punctuated by bursts of neon, guiding the eye forward through a story told in color and motion. The scroll itself is the gameplay metaphor; each section is a scene.\n\nThis system explicitly rejects generic SaaS landing pages, overly complex DeFi dashboards, and template-feeling crypto sites. No hero-metric templates. No identical card grids. No corporate blue gradients. No cookie-cutter \"neon on black with hexagons\" that every web3 project defaults to. The interface should feel immersive and playable, not corporate.\n\nThe personality is playful, friendly, fast. It's a racing game, not a financial instrument. Crypto complexity hides behind simple language. Every element earns its place by contributing to the narrative or driving the visitor toward the single action: go to Twitter and play.",
+    "keyCharacteristics": [
+      "Cinematic darkness as negative space; dark makes neon brighter",
+      "Scroll-driven storytelling with GSAP + Lenis smooth scroll",
+      "Glow-based depth (no drop shadows, never material-style elevation)",
+      "Arcade-tactile component interactions (bouncy, responsive, physical)",
+      "Three-font hierarchy: Space Grotesk, Inter, JetBrains Mono",
+      "Section composition like scenes in a game trailer",
+      "Text readability always takes priority over visual effects"
+    ],
+    "rules": [
+      { "name": "The Glow Budget Rule", "body": "Each section gets one primary glow source (the accent heading), one secondary glow source (a card or badge border on hover), and nothing more. Stacking three or more glows in the same viewport makes the page feel like a Christmas tree.", "section": "colors" },
+      { "name": "The 3% Opacity Floor", "body": "Decorative background elements (hexagons, floating dots, radial gradients) never exceed 3% opacity. They're felt, not seen.", "section": "colors" },
+      { "name": "The Single Glow Word Rule", "body": "Each headline contains exactly one accent-colored word with a text-shadow glow. The rest of the heading is solid white. Never glow the entire heading.", "section": "typography" },
+      { "name": "The Opacity Ladder Rule", "body": "Text opacity follows a strict ladder: 100% (headings), 80% (tagline), 55% (scroll layer descriptions), 45% (card descriptions), 40% (section subtitles), 35% (labels/mono). Never use an arbitrary opacity.", "section": "typography" },
+      { "name": "The No-Shadow Rule", "body": "No box-shadow casts a downward shadow with positive Y-offset as a depth cue. Every shadow is a centered glow (0 0 Npx). The only exception: inset 0 -3px 0 on btn-neon for the pressed-button bevel.", "section": "elevation" }
+    ],
+    "dos": [
+      "Do use cinematic darkness as negative space. Void Black sections with generous padding create breathing room.",
+      "Do limit each section to one primary glow source.",
+      "Do follow the Opacity Ladder for text: 100% → 80% → 55% → 45% → 40% → 35%.",
+      "Do use power3.out for entrances and power3.in for exits.",
+      "Do use elastic.out(1, 0.5-0.6) for hover-leave animations.",
+      "Do keep decorative background elements at 3% opacity or below.",
+      "Do use Space Grotesk for headings, Inter for body, JetBrains Mono for labels.",
+      "Do let text readability always take priority over visual effects.",
+      "Do use backdrop-filter: blur(24px) saturate(180%) for glass panels.",
+      "Do compose each section like a scene in a game trailer."
+    ],
+    "donts": [
+      "Don't use drop shadows with positive Y-offset for depth.",
+      "Don't build hero-metric templates (big number, small label, gradient accent).",
+      "Don't create identical card grids with icon + heading + text repeated endlessly.",
+      "Don't use corporate blue gradients or social proof strips.",
+      "Don't use cookie-cutter neon on black with hexagons as decoration.",
+      "Don't put yield tables or tokenomics charts on the landing page.",
+      "Don't stack more than two glows in the same viewport.",
+      "Don't use bounce or elastic easing for scroll-driven animations.",
+      "Don't exceed 65ch line length for body text.",
+      "Don't use pure #000000 or #ffffff.",
+      "Don't animate CSS layout properties.",
+      "Don't use glassmorphism decoratively or as a default surface."
+    ]
+  }
+}

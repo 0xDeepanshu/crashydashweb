@@ -144,11 +144,11 @@ export function HeroCanvas() {
         },
       });
 
-      // Phase 1 (0–0.08): Hide scroll hint, vignette intensifies
+      // Phase 1 (0–0.08): Hide scroll hint, vignette intensifies — Dark Frame Rule
       tl.to(scrollHintRef.current!, { opacity: 0, duration: 0.06 }, 0);
       tl.fromTo(vignetteRef.current!,
-        { opacity: 0.2 },
-        { opacity: 0.7, duration: 0.5 },
+        { opacity: 0.3 },
+        { opacity: 0.85, duration: 0.5 },
         0.05,
       );
 
@@ -275,21 +275,29 @@ export function HeroCanvas() {
         {/* Particles */}
         <FloatingParticles />
 
-        {/* Vignette */}
+        {/* Vignette — Dark Frame Rule: stronger base for text readability */}
         <div
           ref={vignetteRef}
           className="pointer-events-none absolute inset-0 z-[1]"
           style={{
-            background: 'radial-gradient(ellipse at 50% 50%, transparent 35%, rgba(7,1,15,0.6) 100%)',
-            opacity: 0.2,
+            background: 'radial-gradient(ellipse at 50% 50%, transparent 25%, rgba(7,1,15,0.7) 100%)',
+            opacity: 0.3,
           }}
         />
 
-        {/* Bottom gradient */}
+        {/* Bottom gradient — heavier fade for text contrast */}
         <div
           className="pointer-events-none absolute inset-0 z-[2]"
           style={{
-            background: 'linear-gradient(to top, rgba(7,1,15,0.5) 0%, transparent 35%, transparent 75%, rgba(7,1,15,0.2) 100%)',
+            background: 'linear-gradient(to top, rgba(7,1,15,0.7) 0%, transparent 30%, transparent 70%, rgba(7,1,15,0.3) 100%)',
+          }}
+        />
+
+        {/* Center text backing — Focus Funnel: subtle dark zone behind text */}
+        <div
+          className="pointer-events-none absolute inset-0 z-[3]"
+          style={{
+            background: 'radial-gradient(ellipse at 50% 50%, rgba(7,1,15,0.35) 0%, transparent 55%)',
           }}
         />
 
@@ -311,7 +319,7 @@ export function HeroCanvas() {
                 WebkitBackgroundClip: 'text',
                 WebkitTextFillColor: 'transparent',
                 animation: 'gradient-shift 4s linear infinite',
-                filter: 'drop-shadow(0 0 40px rgba(255,79,216,0.4)) drop-shadow(0 0 80px rgba(111,66,255,0.25))',
+                filter: 'drop-shadow(0 0 40px rgba(255,79,216,0.35))',
               }}
             >
               {titleChars}
@@ -326,7 +334,7 @@ export function HeroCanvas() {
           >
             <p
               className="text-lg sm:text-xl md:text-2xl font-light text-white/80"
-              style={{ fontFamily: "'Inter', system-ui", textShadow: '0 2px 20px rgba(0,0,0,0.6)' }}
+              style={{ fontFamily: "'Inter', system-ui", textShadow: '0 2px 24px rgba(0,0,0,0.8), 0 0 40px rgba(0,0,0,0.4)' }}
             >
               Dodge. Drift. Survive.
             </p>
@@ -371,27 +379,21 @@ export function HeroCanvas() {
               </span>
             </div>
 
+            {/* Single Glow Word Rule: "MPP" is the accent word, rest is solid white */}
             <h2
-              className="text-4xl sm:text-6xl md:text-7xl font-black mb-6 mpp-line font-heading"
+              className="text-4xl sm:text-6xl md:text-7xl font-black mb-6 mpp-line font-heading text-white"
               style={{
                 fontFamily: "'Space Grotesk', 'Inter', sans-serif",
-                filter: 'drop-shadow(0 0 35px rgba(111,66,255,0.5))',
+                textShadow: '0 2px 30px rgba(0,0,0,0.8)',
               }}
             >
-              <span className="text-gradient-animated" style={{
-                background: 'linear-gradient(90deg, #6f42ff, #35f2ff, #ff4fd8)',
-                backgroundSize: '200% auto',
-                WebkitBackgroundClip: 'text',
-                WebkitTextFillColor: 'transparent',
-              }}>
-                MPP
-              </span>
+              <span style={{ color: '#6f42ff', textShadow: '0 0 30px rgba(111,66,255,0.5)' }}>MPP</span>{' '}PROTOCOL
             </h2>
 
-            <p className="text-lg sm:text-xl text-white/55 max-w-2xl mx-auto mb-6 mpp-line leading-relaxed"
-              style={{ fontFamily: "'Inter', system-ui", textShadow: '0 2px 15px rgba(0,0,0,0.5)' }}>
+            <p className="text-lg sm:text-xl text-white/65 max-w-2xl mx-auto mb-6 mpp-line leading-relaxed"
+              style={{ fontFamily: "'Inter', system-ui", textShadow: '0 2px 20px rgba(0,0,0,0.7), 0 0 30px rgba(0,0,0,0.3)' }}>
               Machine Payment Protocol enables seamless in-game micro-transactions.
-              Every race, every upgrade, every reward — settled instantly on-chain.
+              Every race, every upgrade, every reward settled instantly on-chain.
             </p>
 
             <div className="flex flex-wrap justify-center gap-3 mpp-line">
@@ -433,37 +435,32 @@ export function HeroCanvas() {
               </span>
             </div>
 
+            {/* Single Glow Word Rule: "MAGICBLOCKS" is the accent word */}
             <h2
-              className="text-4xl sm:text-6xl md:text-7xl font-black mb-6 magicblocks-line font-heading"
+              className="text-4xl sm:text-6xl md:text-7xl font-black mb-6 magicblocks-line font-heading text-white"
               style={{
                 fontFamily: "'Space Grotesk', 'Inter', sans-serif",
-                filter: 'drop-shadow(0 0 35px rgba(53,242,255,0.5))',
+                textShadow: '0 2px 30px rgba(0,0,0,0.8)',
               }}
             >
-              <span className="text-gradient-animated" style={{
-                background: 'linear-gradient(90deg, #35f2ff, #6f42ff, #7dff72)',
-                backgroundSize: '200% auto',
-                WebkitBackgroundClip: 'text',
-                WebkitTextFillColor: 'transparent',
-              }}>
-                MAGICBLOCKS
-              </span>
+              PRIVATE{' '}<span style={{ color: '#35f2ff', textShadow: '0 0 30px rgba(53,242,255,0.5)' }}>BLOCKS</span>
             </h2>
 
-            <p className="text-lg sm:text-xl text-white/55 max-w-2xl mx-auto mb-6 magicblocks-line leading-relaxed"
-              style={{ fontFamily: "'Inter', system-ui", textShadow: '0 2px 15px rgba(0,0,0,0.5)' }}>
+            <p className="text-lg sm:text-xl text-white/65 max-w-2xl mx-auto mb-6 magicblocks-line leading-relaxed"
+              style={{ fontFamily: "'Inter', system-ui", textShadow: '0 2px 20px rgba(0,0,0,0.7), 0 0 30px rgba(0,0,0,0.3)' }}>
               Private transactions powered by MagicBlocks. Your gameplay data stays yours.
               Encrypted race results, hidden strategies, confidential agent training.
             </p>
 
+            {/* Focus Funnel: badges at lower opacity than description */}
             <div className="flex flex-wrap justify-center gap-3 magicblocks-line">
-              <div className="badge-pill" style={{ background: 'rgba(53,242,255,0.06)', borderColor: 'rgba(53,242,255,0.2)' }}>
+              <div className="badge-pill" style={{ background: 'rgba(53,242,255,0.05)', borderColor: 'rgba(53,242,255,0.15)', color: 'rgba(224,208,255,0.8)' }}>
                 <span className="badge-icon">🔒</span> End-to-End Encrypted
               </div>
-              <div className="badge-pill" style={{ background: 'rgba(53,242,255,0.06)', borderColor: 'rgba(53,242,255,0.2)' }}>
+              <div className="badge-pill" style={{ background: 'rgba(53,242,255,0.05)', borderColor: 'rgba(53,242,255,0.15)', color: 'rgba(224,208,255,0.8)' }}>
                 <span className="badge-icon">🧊</span> MagicBlocks Engine
               </div>
-              <div className="badge-pill" style={{ background: 'rgba(53,242,255,0.06)', borderColor: 'rgba(53,242,255,0.2)' }}>
+              <div className="badge-pill" style={{ background: 'rgba(53,242,255,0.05)', borderColor: 'rgba(53,242,255,0.15)', color: 'rgba(224,208,255,0.8)' }}>
                 <span className="badge-icon">👁️</span> Zero-Knowledge Proofs
               </div>
             </div>
@@ -496,25 +493,19 @@ export function HeroCanvas() {
               </span>
             </div>
 
+            {/* Single Glow Word Rule: "AGENTS" is the accent word */}
             <h2
-              className="text-4xl sm:text-6xl md:text-7xl font-black mb-6 ai-agents-line font-heading"
+              className="text-4xl sm:text-6xl md:text-7xl font-black mb-6 ai-agents-line font-heading text-white"
               style={{
                 fontFamily: "'Space Grotesk', 'Inter', sans-serif",
-                filter: 'drop-shadow(0 0 35px rgba(125,255,114,0.5))',
+                textShadow: '0 2px 30px rgba(0,0,0,0.8)',
               }}
             >
-              <span className="text-gradient-animated" style={{
-                background: 'linear-gradient(90deg, #7dff72, #35f2ff, #ff9966)',
-                backgroundSize: '200% auto',
-                WebkitBackgroundClip: 'text',
-                WebkitTextFillColor: 'transparent',
-              }}>
-                AI AGENTS PLAY
-              </span>
+              AI{' '}<span style={{ color: '#7dff72', textShadow: '0 0 30px rgba(125,255,114,0.5)' }}>AGENTS</span>{' '}PLAY
             </h2>
 
-            <p className="text-lg sm:text-xl text-white/55 max-w-2xl mx-auto mb-6 ai-agents-line leading-relaxed"
-              style={{ fontFamily: "'Inter', system-ui", textShadow: '0 2px 15px rgba(0,0,0,0.5)' }}>
+            <p className="text-lg sm:text-xl text-white/65 max-w-2xl mx-auto mb-6 ai-agents-line leading-relaxed"
+              style={{ fontFamily: "'Inter', system-ui", textShadow: '0 2px 20px rgba(0,0,0,0.7), 0 0 30px rgba(0,0,0,0.3)' }}>
               Train autonomous AI agents that race 24/7 on your behalf.
               They learn, adapt, and earn while you sleep. Your agent. Your strategy.
             </p>
@@ -540,23 +531,19 @@ export function HeroCanvas() {
           style={{ opacity: 0 }}
         >
           <div className="max-w-4xl text-center">
+            {/* Single Glow Word Rule: "PLAY" is the accent word. Display size, solid white + one glow. */}
             <h2
-              className="text-5xl sm:text-7xl md:text-8xl lg:text-9xl font-black mb-5 cta-subtitle font-heading"
+              className="text-5xl sm:text-7xl md:text-8xl lg:text-9xl font-black mb-5 cta-subtitle font-heading text-white"
               style={{
                 fontFamily: "'Space Grotesk', 'Inter', sans-serif",
-                filter: 'drop-shadow(0 0 50px rgba(255,79,216,0.5)) drop-shadow(0 0 100px rgba(111,66,255,0.3))',
-                background: 'linear-gradient(90deg, #ff4fd8, #6f42ff, #35f2ff, #ff9966, #ff4fd8)',
-                backgroundSize: '200% auto',
-                WebkitBackgroundClip: 'text',
-                WebkitTextFillColor: 'transparent',
-                animation: 'gradient-shift 4s linear infinite',
+                textShadow: '0 4px 40px rgba(0,0,0,0.85)',
               }}
             >
-              EASY TO PLAY
+              CRASH{' '}<span style={{ color: '#ff4fd8', textShadow: '0 0 40px rgba(255,79,216,0.5)' }}>DASH</span>
             </h2>
 
-            <p className="text-lg sm:text-xl text-white/50 max-w-xl mx-auto mb-5 cta-subtitle"
-              style={{ fontFamily: "'Inter', system-ui", textShadow: '0 2px 15px rgba(0,0,0,0.5)' }}>
+            <p className="text-lg sm:text-xl text-white/65 max-w-xl mx-auto mb-5 cta-subtitle"
+              style={{ fontFamily: "'Inter', system-ui", textShadow: '0 2px 20px rgba(0,0,0,0.7), 0 0 30px rgba(0,0,0,0.3)' }}>
               No complex setup. No steep learning curve. Jump in, race, and earn.
             </p>
 
