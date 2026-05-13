@@ -1,26 +1,274 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --font-sans: ui-sans-serif, system-ui, sans-serif;
+  --font-mono: ui-monospace, monospace;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+/* ========== BASE ========== */
+html {
+  scroll-behavior: auto; /* Lenis handles smooth */
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background: #07010f;
+  color: #f0e6ff;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body::-webkit-scrollbar { width: 4px; }
+body::-webkit-scrollbar-track { background: #07010f; }
+body::-webkit-scrollbar-thumb { background: #ff4fd8; border-radius: 2px; }
+
+/* ========== ANIMATED GRADIENT TEXT ========== */
+.text-gradient-animated {
+  animation: gradient-shift 4s linear infinite;
+}
+
+@keyframes gradient-shift {
+  0% { background-position: 0% center; }
+  100% { background-position: 200% center; }
+}
+
+/* ========== BUTTONS ========== */
+.btn-neon {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.75rem 2rem;
+  font-family: 'VT323', monospace;
+  font-size: 1.125rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  background: linear-gradient(135deg, #ff4fd8, #ff6be5);
+  color: #07010f;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  overflow: hidden;
+  transition: all 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
+  box-shadow:
+    0 0 15px rgba(255, 79, 216, 0.5),
+    0 0 30px rgba(255, 79, 216, 0.2),
+    inset 0 -3px 0 rgba(0, 0, 0, 0.3); will-change: transform;
+}
+
+.btn-neon:hover {
+  transform: translateY(-2px) scale(1.02);
+  box-shadow:
+    0 0 25px rgba(255, 79, 216, 0.7),
+    0 0 50px rgba(255, 79, 216, 0.3),
+    inset 0 -3px 0 rgba(0, 0, 0, 0.3);
+}
+
+.btn-neon:active {
+  transform: translateY(1px) scale(0.98);
+}
+
+.btn-neon::after {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -60%;
+  width: 40%;
+  height: 200%;
+  background: linear-gradient(90deg, transparent 0%, rgba(255,255,255,0.35) 50%, transparent 100%);
+  transform: skewX(-20deg);
+  animation: btn-shine 3s ease-in-out infinite;
+}
+
+@keyframes btn-shine {
+  0%, 60%, 100% { left: -60%; }
+  30% { left: 120%; }
+}
+
+.btn-outline {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.75rem 2rem;
+  font-family: 'VT323', monospace;
+  font-size: 1.125rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  background: transparent;
+  color: #35f2ff;
+  border: 2px solid rgba(53, 242, 255, 0.6);
+  border-radius: 4px;
+  cursor: pointer;
+  overflow: hidden;
+  transition: all 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.btn-outline:hover {
+  background: rgba(53, 242, 255, 0.1);
+  transform: translateY(-2px) scale(1.02);
+  box-shadow: 0 0 20px rgba(53, 242, 255, 0.3);
+}
+
+/* ========== GLASS PANEL ========== */
+.panel-glass {
+  background: rgba(7, 1, 15, 0.6);
+  backdrop-filter: blur(20px) saturate(180%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
+  border: 1px solid rgba(255, 79, 216, 0.15);
+  border-radius: 12px;
+  box-shadow:
+    0 0 30px rgba(111, 66, 255, 0.1),
+    0 8px 32px rgba(0, 0, 0, 0.4),
+    inset 0 1px 0 rgba(255, 255, 255, 0.05);
+  position: relative;
+  overflow: hidden;
+}
+
+.panel-glass::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent 0%, rgba(255, 79, 216, 0.5) 50%, transparent 100%);
+}
+
+/* ========== NEON TEXT UTILITIES ========== */
+.text-neon-pink { color: #ff4fd8; }
+.text-neon-cyan { color: #35f2ff; }
+.text-synth-purple { color: #6f42ff; }
+.text-synth-orange { color: #ff9966; }
+
+/* ========== NEON LINE ========== */
+.neon-line-anim {
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--accent), transparent);
+  position: relative;
+  margin-top: 1rem;
+}
+
+/* ========== SCROLL HINT ========== */
+.scroll-hint-bounce {
+  animation: scroll-bounce-anim 2s ease-in-out infinite;
+}
+
+@keyframes scroll-bounce-anim {
+  0%, 100% { transform: translateX(-50%) translateY(0); opacity: 0.7; }
+  50% { transform: translateX(-50%) translateY(8px); opacity: 1; }
+}
+
+/* ========== FONT UTILITIES ========== */
+.font-vt323 {
+  font-family: 'VT323', 'Press Start 2P', monospace;
+}
+
+/* ========== HERO CONTENT ANIMATION ========== */
+.hero-content {
+  opacity: 1;
+}
+
+/* ========== VHS SCANLINES (CSS-only) ========== */
+.scanline-overlay {
+  pointer-events: none;
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  background: repeating-linear-gradient(
+    0deg,
+    transparent,
+    transparent 2px,
+    rgba(0, 0, 0, 0.015) 2px,
+    rgba(0, 0, 0, 0.015) 4px
+  );
+}
+
+/* ========== HERO CHAR ANIMATION ========== */
+.hero-char {
+  will-change: transform, opacity;
+}
+
+::selection {
+  background: rgba(139, 92, 246, 0.3);
+  color: #ffffff;
+}
+
+/* ========== BADGE PILL ========== */
+.badge-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.5rem 1rem;
+  border-radius: 999px;
+  font-family: 'VT323', monospace;
+  font-size: 0.95rem;
+  color: #e0d0ff;
+  background: rgba(111, 66, 255, 0.08);
+  border: 1px solid rgba(111, 66, 255, 0.25);
+  backdrop-filter: blur(8px);
+}
+
+.badge-pill.badge-green {
+  background: rgba(125, 255, 114, 0.08);
+  border-color: rgba(125, 255, 114, 0.25);
+}
+
+.badge-pill.badge-pink {
+  background: rgba(255, 79, 216, 0.08);
+  border-color: rgba(255, 79, 216, 0.25);
+}
+
+.badge-icon {
+  font-size: 1rem;
+}
+
+/* ========== BUTTON LARGE ========== */
+.btn-large {
+  padding: 1rem 2.5rem;
+  font-size: 1.25rem;
+}
+
+/* ========== WALLET BUTTON ========== */
+.btn-wallet {
+  background: transparent;
+  color: #a78bfa;
+  border: 2px solid rgba(167, 139, 250, 0.5);
+}
+.btn-wallet:hover {
+  background: rgba(167, 139, 250, 0.1);
+  box-shadow: 0 0 20px rgba(167, 139, 250, 0.3);
+  color: #c4b5fd;
+}
+
+/* ========== STATS COUNTER ========== */
+.stat-card {
+  background: rgba(7, 1, 15, 0.7);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(111, 66, 255, 0.15);
+  border-radius: 12px;
+  padding: 1.25rem 1.5rem;
+  text-align: center;
+}
+.stat-card:hover {
+  border-color: rgba(111, 66, 255, 0.35);
+}
+
+/* ========== SECTION DIVIDER ========== */
+.section-divider {
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(111, 66, 255, 0.3), transparent);
+  margin: 0 auto;
+  max-width: 80%;
+}
+
+/* ========== GLOW PULSE ========== */
+@keyframes glow-pulse {
+  0%, 100% { opacity: 0.5; }
+  50% { opacity: 1; }
+}
+.glow-pulse {
+  animation: glow-pulse 2s ease-in-out infinite;
 }
