@@ -1,5 +1,6 @@
 'use client';
 
+import { SmoothScroll } from '@/components/SmoothScroll';
 import { HeroCanvas } from '@/components/hero/HeroCanvas';
 import { FeaturesSection } from '@/components/features/FeaturesSection';
 import { BlockchainSection } from '@/components/BlockchainSection';
@@ -9,33 +10,35 @@ import { Footer } from '@/components/Footer';
 
 export default function Home() {
   return (
-    <main>
-      {/* Scanline overlay */}
-      <div className="scanline-overlay" />
+    <SmoothScroll>
+      <main>
+        {/* Scanline overlay */}
+        <div className="scanline-overlay" />
 
-      {/* Hero: pinned frame-scroll + scroll-driven text layers */}
-      <HeroCanvas />
+        {/* Hero: pinned frame-scroll + scroll-driven text layers */}
+        <HeroCanvas />
 
-      {/* Features: the pillars of the game */}
-      <FeaturesSection />
+        {/* Features: the pillars of the game */}
+        <FeaturesSection />
 
-      {/* Section divider */}
-      <div className="section-divider" />
+        {/* Section divider */}
+        <div className="section-divider" />
 
-      {/* Blockchain: on-chain gameplay */}
-      <BlockchainSection />
+        {/* Blockchain: on-chain gameplay */}
+        <BlockchainSection />
 
-      {/* AI Agents: train, deploy, earn */}
-      <AIAgentsSection />
+        {/* AI Agents: train, deploy, earn */}
+        <AIAgentsSection />
 
-      {/* Section divider */}
-      <div className="section-divider" />
+        {/* Section divider */}
+        <div className="section-divider" />
 
-      {/* Worlds showcase */}
-      <WorldsSection />
+        {/* Worlds showcase */}
+        <WorldsSection />
 
-      {/* Footer */}
-      <Footer />
-    </main>
+        {/* Footer */}
+        <Footer />
+      </main>
+    </SmoothScroll>
   );
 }

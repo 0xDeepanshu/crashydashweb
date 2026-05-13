@@ -53,10 +53,10 @@ export function WorldsSection() {
         { opacity: 0, y: 50, scale: 0.9 },
         {
           opacity: 1, y: 0, scale: 1,
-          duration: 1, ease: 'power3.out',
+          duration: 1.1, ease: 'power3.out',
           scrollTrigger: {
             trigger: headingRef.current,
-            start: 'top 80%',
+            start: 'top 82%',
             toggleActions: 'play none none reverse',
           },
         },
@@ -65,15 +65,15 @@ export function WorldsSection() {
       // Cards stagger with 3D depth entrance
       const cards = Array.from(trackRef.current?.querySelectorAll('.world-card') || []);
       gsap.fromTo(cards,
-        { opacity: 0, y: 100, scale: 0.85, rotationY: 15 },
+        { opacity: 0, y: 100, scale: 0.85, rotationY: 12 },
         {
           opacity: 1, y: 0, scale: 1, rotationY: 0,
-          stagger: { each: 0.12, from: 'start' },
-          duration: 0.9,
+          stagger: { each: 0.1, from: 'start' },
+          duration: 1,
           ease: 'power3.out',
           scrollTrigger: {
             trigger: trackRef.current,
-            start: 'top 80%',
+            start: 'top 82%',
             toggleActions: 'play none none reverse',
           },
         },
@@ -81,15 +81,15 @@ export function WorldsSection() {
 
       // Emoji float-up entrance
       gsap.fromTo('.world-emoji',
-        { y: 40, scale: 0, rotation: -15 },
+        { y: 40, scale: 0, rotation: -10 },
         {
           y: 0, scale: 1, rotation: 0,
-          duration: 0.8,
-          stagger: 0.12,
+          duration: 0.9,
+          stagger: 0.1,
           ease: 'elastic.out(1, 0.5)',
           scrollTrigger: {
             trigger: trackRef.current,
-            start: 'top 75%',
+            start: 'top 78%',
             toggleActions: 'play none none reverse',
           },
         },
@@ -104,7 +104,7 @@ export function WorldsSection() {
 
         const handleEnter = () => {
           gsap.to(card, {
-            scale: 1.04, y: -8,
+            scale: 1.04, y: -10,
             duration: 0.4, ease: 'power2.out',
           });
           if (emoji) {
@@ -147,15 +147,17 @@ export function WorldsSection() {
   }, []);
 
   return (
-    <section ref={sectionRef} className="relative z-[10] py-24 sm:py-32 px-4 sm:px-8" style={{ background: 'rgba(7,1,15,0.95)' }}>
+    <section ref={sectionRef} className="relative z-[10] py-28 sm:py-36 px-4 sm:px-8" style={{ background: 'rgba(7,1,15,0.95)' }}>
       <div className="absolute top-0 left-0 right-0 h-32 pointer-events-none" style={{ background: 'linear-gradient(to bottom, transparent, rgba(7,1,15,0.95))' }} />
       <div className="absolute bottom-0 left-0 right-0 h-32 pointer-events-none" style={{ background: 'linear-gradient(to top, transparent, rgba(7,1,15,0.95))' }} />
 
       <div ref={headingRef} className="max-w-5xl mx-auto text-center mb-16">
-        <h2 className="text-4xl sm:text-5xl md:text-6xl font-black tracking-tight text-white" style={{ fontFamily: 'ui-sans-serif, system-ui, sans-serif' }}>
-          WORLDS TO <span className="text-neon-cyan" style={{ textShadow: '0 0 20px rgba(53,242,255,0.5)' }}>CONQUER</span>
+        <h2 className="text-4xl sm:text-5xl md:text-6xl font-black tracking-tight text-white font-heading"
+            style={{ fontFamily: "'Space Grotesk', 'Inter', sans-serif" }}>
+          WORLDS TO <span className="text-neon-cyan" style={{ textShadow: '0 0 25px rgba(53,242,255,0.5)' }}>CONQUER</span>
         </h2>
-        <p className="mt-4 text-lg text-white/50 font-light max-w-xl mx-auto">
+        <p className="mt-5 text-lg text-white/40 font-light max-w-xl mx-auto leading-relaxed"
+           style={{ fontFamily: "'Inter', system-ui" }}>
           Each world is a handcrafted voxel playground of deadly beauty.
         </p>
       </div>
@@ -165,10 +167,10 @@ export function WorldsSection() {
           <div
             key={w.name}
             ref={el => { cardRefs.current[i] = el; }}
-            className="world-card relative rounded-xl overflow-hidden cursor-pointer"
+            className="world-card relative rounded-2xl overflow-hidden cursor-pointer"
             style={{
               aspectRatio: '3/4',
-              border: `1px solid ${w.accent}20`,
+              border: `1px solid ${w.accent}15`,
               willChange: 'transform',
               transformStyle: 'preserve-3d',
             }}
@@ -178,15 +180,15 @@ export function WorldsSection() {
 
             {/* Decorative radial glow */}
             <div
-              className="absolute inset-0 opacity-20"
-              style={{ background: `radial-gradient(circle at 50% 80%, ${w.accent}25 0%, transparent 60%)` }}
+              className="absolute inset-0 opacity-15"
+              style={{ background: `radial-gradient(circle at 50% 80%, ${w.accent}20 0%, transparent 60%)` }}
             />
 
             {/* Emoji art */}
             <div className="absolute inset-0 flex items-center justify-center">
               <span
                 className="world-emoji text-7xl sm:text-8xl"
-                style={{ filter: `drop-shadow(0 0 25px ${w.accent}50)`, willChange: 'transform' }}
+                style={{ filter: `drop-shadow(0 0 30px ${w.accent}40)`, willChange: 'transform' }}
               >
                 {w.emoji}
               </span>
@@ -194,14 +196,16 @@ export function WorldsSection() {
 
             {/* Bottom info */}
             <div className="world-info absolute bottom-0 left-0 right-0 p-5" style={{ background: 'linear-gradient(to top, rgba(7,1,15,0.9) 0%, transparent 100%)' }}>
-              <h3 className="font-vt323 text-xl text-white tracking-wider mb-1">{w.name}</h3>
-              <p className="text-white/40 text-xs font-light">{w.subtitle}</p>
+              <h3 className="text-base font-bold text-white tracking-wide mb-1 font-heading"
+                  style={{ fontFamily: "'Space Grotesk', sans-serif" }}>{w.name}</h3>
+              <p className="text-white/35 text-xs font-light"
+                 style={{ fontFamily: "'Inter', system-ui" }}>{w.subtitle}</p>
             </div>
 
             {/* Hover glow */}
             <div
-              className="absolute inset-0 rounded-xl opacity-0 hover:opacity-100 transition-opacity duration-300 pointer-events-none"
-              style={{ boxShadow: `inset 0 0 40px ${w.accent}20, 0 0 20px ${w.accent}10` }}
+              className="absolute inset-0 rounded-2xl opacity-0 hover:opacity-100 transition-opacity duration-300 pointer-events-none"
+              style={{ boxShadow: `inset 0 0 40px ${w.accent}15, 0 0 25px ${w.accent}08` }}
             />
           </div>
         ))}

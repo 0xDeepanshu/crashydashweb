@@ -17,12 +17,11 @@ export function HeroCanvas() {
   const scrollHintRef = useRef<HTMLDivElement>(null);
   const vignetteRef = useRef<HTMLDivElement>(null);
 
-  // New: scroll-driven text layers
-  const blockchainLayerRef = useRef<HTMLDivElement>(null);
-  const aiLayerRef = useRef<HTMLDivElement>(null);
+  // Scroll-driven text layers
   const mppLayerRef = useRef<HTMLDivElement>(null);
-  const ctaLayerRef = useRef<HTMLDivElement>(null);
-  const dividerRefs = useRef<(HTMLDivElement | null)[]>([]);
+  const magicblocksLayerRef = useRef<HTMLDivElement>(null);
+  const aiAgentsLayerRef = useRef<HTMLDivElement>(null);
+  const easyPlayLayerRef = useRef<HTMLDivElement>(null);
 
   const imgRef = useRef<HTMLImageElement>(null);
   const imagesRef = useRef<HTMLImageElement[]>([]);
@@ -86,40 +85,40 @@ export function HeroCanvas() {
 
       // Fade in content container
       entranceTl.to(contentRef.current!, {
-        opacity: 1, duration: 0.6, ease: 'power2.out',
+        opacity: 1, duration: 0.8, ease: 'power2.out',
       }, 0);
 
       // Character-level title entrance
       const chars = titleRef.current?.querySelectorAll('.hero-char');
       if (chars?.length) {
         entranceTl.fromTo(chars,
-          { opacity: 0, y: 60, rotationX: -90, scale: 0.5 },
+          { opacity: 0, y: 50, rotationX: -60, scale: 0.6 },
           {
             opacity: 1, y: 0, rotationX: 0, scale: 1,
-            duration: 0.8,
-            stagger: 0.03,
+            duration: 0.9,
+            stagger: 0.035,
             ease: 'back.out(1.7)',
           },
-          0.1,
+          0.15,
         );
       }
 
       // Tagline
       entranceTl.to(taglineRef.current!, {
-        opacity: 1, y: 0, letterSpacing: '0.15em',
-        duration: 0.7, ease: 'power3.out',
-      }, 0.5);
+        opacity: 1, y: 0, letterSpacing: '0.12em',
+        duration: 0.8, ease: 'power3.out',
+      }, 0.6);
 
       // Buttons
       entranceTl.to(buttonsRef.current!, {
         opacity: 1, y: 0, scale: 1,
-        duration: 0.6, ease: 'back.out(1.5)',
-      }, 0.7);
+        duration: 0.7, ease: 'back.out(1.5)',
+      }, 0.8);
 
       // Scroll hint
       entranceTl.to(scrollHintRef.current!, {
-        opacity: 0.7, duration: 0.5,
-      }, 1.0);
+        opacity: 0.7, duration: 0.6,
+      }, 1.2);
     }, wrapper);
 
     return () => ctx.revert();
@@ -135,8 +134,8 @@ export function HeroCanvas() {
         scrollTrigger: {
           trigger: wrapper,
           start: 'top top',
-          end: '+=600%', // extended for more scroll phases
-          scrub: 0.3,
+          end: '+=600%',
+          scrub: 0.6,
           pin: true,
           anticipatePin: 1,
           onUpdate: (self) => {
@@ -146,104 +145,100 @@ export function HeroCanvas() {
       });
 
       // Phase 1 (0–0.08): Hide scroll hint, vignette intensifies
-      tl.to(scrollHintRef.current!, { opacity: 0, duration: 0.08 }, 0);
+      tl.to(scrollHintRef.current!, { opacity: 0, duration: 0.06 }, 0);
       tl.fromTo(vignetteRef.current!,
         { opacity: 0.2 },
-        { opacity: 0.65, duration: 0.5 },
-        0.1,
+        { opacity: 0.7, duration: 0.5 },
+        0.05,
       );
 
-      // Phase 2 (0.08–0.20): Initial title/tagline exit
+      // Phase 2 (0.06–0.18): Initial title/tagline exit
       tl.to(contentRef.current!, {
-        opacity: 0, y: -80, scale: 0.9,
-        duration: 0.12, ease: 'power2.in',
-      }, 0.08);
+        opacity: 0, y: -100, scale: 0.85,
+        duration: 0.12, ease: 'power3.in',
+      }, 0.06);
 
       const titleChars = titleRef.current?.querySelectorAll('.hero-char');
       if (titleChars?.length) {
         tl.to(titleChars, {
-          opacity: 0, y: -40, rotationX: 45, scale: 0.8,
-          duration: 0.1, stagger: 0.004, ease: 'power2.in',
-        }, 0.1);
+          opacity: 0, y: -50, rotationX: 45, scale: 0.7,
+          duration: 0.1, stagger: 0.005, ease: 'power2.in',
+        }, 0.08);
       }
 
-      // Phase 3 (0.20–0.30): Blockchain layer slides in
-      tl.fromTo(blockchainLayerRef.current!,
-        { y: 80, opacity: 0, scale: 0.92 },
-        { y: 0, opacity: 1, scale: 1, duration: 0.1, ease: 'power3.out' },
+      // ===== Layer 1: MPP (Machine Payment Protocol) =====
+      tl.fromTo(mppLayerRef.current!,
+        { y: 100, opacity: 0, scale: 0.9 },
+        { y: 0, opacity: 1, scale: 1, duration: 0.12, ease: 'power3.out' },
         0.20,
       );
-      // Blockchain: stagger subtitle lines
-      tl.fromTo('.blockchain-line',
-        { y: 30, opacity: 0 },
-        { y: 0, opacity: 1, stagger: 0.06, duration: 0.08, ease: 'power2.out' },
-        0.22,
+      tl.fromTo('.mpp-line',
+        { y: 40, opacity: 0 },
+        { y: 0, opacity: 1, stagger: 0.04, duration: 0.08, ease: 'power2.out' },
+        0.23,
       );
+      tl.to(mppLayerRef.current!, {
+        y: -80, opacity: 0, scale: 0.88,
+        duration: 0.1, ease: 'power3.in',
+      }, 0.36);
 
-      // Phase 4 (0.30–0.40): Blockchain layer exits, AI layer enters
-      tl.to(blockchainLayerRef.current!, {
-        y: -60, opacity: 0, scale: 0.9,
-        duration: 0.1, ease: 'power2.in',
-      }, 0.38);
-
-      tl.fromTo(aiLayerRef.current!,
-        { y: 80, opacity: 0, scale: 0.92 },
-        { y: 0, opacity: 1, scale: 1, duration: 0.1, ease: 'power3.out' },
+      // ===== Layer 2: MagicBlocks Private Transactions =====
+      tl.fromTo(magicblocksLayerRef.current!,
+        { y: 100, opacity: 0, scale: 0.9 },
+        { y: 0, opacity: 1, scale: 1, duration: 0.12, ease: 'power3.out' },
         0.40,
       );
-      tl.fromTo('.ai-line',
-        { y: 30, opacity: 0 },
-        { y: 0, opacity: 1, stagger: 0.06, duration: 0.08, ease: 'power2.out' },
-        0.42,
+      tl.fromTo('.magicblocks-line',
+        { y: 40, opacity: 0 },
+        { y: 0, opacity: 1, stagger: 0.04, duration: 0.08, ease: 'power2.out' },
+        0.43,
+      );
+      tl.to(magicblocksLayerRef.current!, {
+        y: -80, opacity: 0, scale: 0.88,
+        duration: 0.1, ease: 'power3.in',
+      }, 0.54,
       );
 
-      // Phase 5 (0.48–0.58): AI layer exits, MPP layer enters
-      tl.to(aiLayerRef.current!, {
-        y: -60, opacity: 0, scale: 0.9,
-        duration: 0.1, ease: 'power2.in',
-      }, 0.48);
-
-      tl.fromTo(mppLayerRef.current!,
-        { y: 80, opacity: 0, scale: 0.92 },
-        { y: 0, opacity: 1, scale: 1, duration: 0.1, ease: 'power3.out' },
-        0.50,
+      // ===== Layer 3: AI Agents Can Play =====
+      tl.fromTo(aiAgentsLayerRef.current!,
+        { y: 100, opacity: 0, scale: 0.9 },
+        { y: 0, opacity: 1, scale: 1, duration: 0.12, ease: 'power3.out' },
+        0.58,
       );
-      tl.fromTo('.mpp-line',
-        { y: 30, opacity: 0 },
-        { y: 0, opacity: 1, stagger: 0.06, duration: 0.08, ease: 'power2.out' },
-        0.52,
+      tl.fromTo('.ai-agents-line',
+        { y: 40, opacity: 0 },
+        { y: 0, opacity: 1, stagger: 0.04, duration: 0.08, ease: 'power2.out' },
+        0.61,
       );
-
-      // Phase 6 (0.58–0.70): MPP exits, final CTA grand entrance
-      tl.to(mppLayerRef.current!, {
-        y: -60, opacity: 0, scale: 0.9,
-        duration: 0.1, ease: 'power2.in',
-      }, 0.58);
-
-      // Bring title back with new epic text (grand re-entry)
-      tl.fromTo(ctaLayerRef.current!,
-        { y: 100, opacity: 0, scale: 0.85 },
-        { y: 0, opacity: 1, scale: 1, duration: 0.12, ease: 'elastic.out(1, 0.7)' },
-        0.60,
+      tl.to(aiAgentsLayerRef.current!, {
+        y: -80, opacity: 0, scale: 0.88,
+        duration: 0.1, ease: 'power3.in',
+      }, 0.72,
       );
 
-      // Divider lines
+      // ===== Layer 4: Easy to Play (Grand CTA) =====
+      tl.fromTo(easyPlayLayerRef.current!,
+        { y: 120, opacity: 0, scale: 0.8 },
+        { y: 0, opacity: 1, scale: 1, duration: 0.14, ease: 'elastic.out(1, 0.7)' },
+        0.76,
+      );
+
       tl.fromTo('.cta-divider',
         { scaleX: 0 },
-        { scaleX: 1, stagger: 0.05, duration: 0.08, ease: 'power3.out' },
-        0.62,
+        { scaleX: 1, stagger: 0.04, duration: 0.08, ease: 'power3.out' },
+        0.78,
       );
 
       tl.fromTo('.cta-subtitle',
         { y: 40, opacity: 0 },
-        { y: 0, opacity: 1, stagger: 0.05, duration: 0.08, ease: 'power2.out' },
-        0.64,
+        { y: 0, opacity: 1, stagger: 0.04, duration: 0.08, ease: 'power2.out' },
+        0.80,
       );
 
       tl.fromTo('.cta-buttons',
         { y: 30, opacity: 0, scale: 0.9 },
         { y: 0, opacity: 1, scale: 1, duration: 0.1, ease: 'back.out(1.8)' },
-        0.68,
+        0.84,
       );
     }, wrapper);
 
@@ -294,7 +289,7 @@ export function HeroCanvas() {
         <div
           className="pointer-events-none absolute inset-0 z-[2]"
           style={{
-            background: 'linear-gradient(to top, rgba(7,1,15,0.45) 0%, transparent 35%, transparent 75%, rgba(7,1,15,0.2) 100%)',
+            background: 'linear-gradient(to top, rgba(7,1,15,0.5) 0%, transparent 35%, transparent 75%, rgba(7,1,15,0.2) 100%)',
           }}
         />
 
@@ -305,17 +300,18 @@ export function HeroCanvas() {
           style={{ opacity: 0 }}
         >
           {/* Main Title */}
-          <div className="mb-4 text-center" style={{ perspective: '800px' }}>
+          <div className="mb-5 text-center" style={{ perspective: '800px' }}>
             <h1
               ref={titleRef}
-              className="text-5xl sm:text-7xl md:text-8xl lg:text-9xl font-black tracking-tighter"
+              className="text-5xl sm:text-7xl md:text-8xl lg:text-9xl font-black tracking-tighter font-heading"
               style={{
+                fontFamily: "'Space Grotesk', 'Inter', sans-serif",
                 background: 'linear-gradient(90deg, #ff4fd8, #6f42ff, #35f2ff, #ff9966, #ff4fd8)',
                 backgroundSize: '200% auto',
                 WebkitBackgroundClip: 'text',
                 WebkitTextFillColor: 'transparent',
                 animation: 'gradient-shift 4s linear infinite',
-                filter: 'drop-shadow(0 0 40px rgba(255,79,216,0.5)) drop-shadow(0 0 80px rgba(111,66,255,0.3))',
+                filter: 'drop-shadow(0 0 40px rgba(255,79,216,0.4)) drop-shadow(0 0 80px rgba(111,66,255,0.25))',
               }}
             >
               {titleChars}
@@ -325,12 +321,12 @@ export function HeroCanvas() {
           {/* Tagline */}
           <div
             ref={taglineRef}
-            className="mb-8 text-center"
-            style={{ opacity: 0, transform: 'translateY(25px)', letterSpacing: '0.5em' }}
+            className="mb-10 text-center"
+            style={{ opacity: 0, transform: 'translateY(25px)', letterSpacing: '0.4em' }}
           >
             <p
               className="text-lg sm:text-xl md:text-2xl font-light text-white/80"
-              style={{ fontFamily: 'ui-sans-serif, system-ui', textShadow: '0 2px 20px rgba(0,0,0,0.6)' }}
+              style={{ fontFamily: "'Inter', system-ui", textShadow: '0 2px 20px rgba(0,0,0,0.6)' }}
             >
               Dodge. Drift. Survive.
             </p>
@@ -354,32 +350,32 @@ export function HeroCanvas() {
           </div>
         </div>
 
-        {/* ===== Scroll Layer: Blockchain ===== */}
+        {/* ===== Scroll Layer 1: MPP (Machine Payment Protocol) ===== */}
         <div
-          ref={blockchainLayerRef}
+          ref={mppLayerRef}
           className="absolute inset-0 z-[5] flex flex-col items-center justify-center px-6 pointer-events-none"
           style={{ opacity: 0 }}
         >
           <div className="max-w-3xl text-center">
-            <div className="mb-3 blockchain-line">
+            <div className="mb-4 mpp-line">
               <span className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-sm font-medium"
                 style={{
-                  background: 'rgba(111,66,255,0.15)',
-                  border: '1px solid rgba(111,66,255,0.4)',
+                  background: 'rgba(111,66,255,0.12)',
+                  border: '1px solid rgba(111,66,255,0.35)',
                   color: '#a78bfa',
-                  fontFamily: 'VT323, monospace',
+                  fontFamily: "'Space Grotesk', sans-serif",
                 }}
               >
                 <span className="w-2 h-2 rounded-full bg-green-400 animate-pulse" />
-                ON-CHAIN GAMEPLAY
+                MACHINE PAYMENT PROTOCOL
               </span>
             </div>
 
             <h2
-              className="text-4xl sm:text-6xl md:text-7xl font-black mb-6 blockchain-line"
+              className="text-4xl sm:text-6xl md:text-7xl font-black mb-6 mpp-line font-heading"
               style={{
-                fontFamily: 'ui-sans-serif, system-ui',
-                filter: 'drop-shadow(0 0 30px rgba(111,66,255,0.5))',
+                fontFamily: "'Space Grotesk', 'Inter', sans-serif",
+                filter: 'drop-shadow(0 0 35px rgba(111,66,255,0.5))',
               }}
             >
               <span className="text-gradient-animated" style={{
@@ -388,61 +384,123 @@ export function HeroCanvas() {
                 WebkitBackgroundClip: 'text',
                 WebkitTextFillColor: 'transparent',
               }}>
-                POWERED BY BLOCKCHAIN
+                MPP
               </span>
             </h2>
 
-            <p className="text-lg sm:text-xl text-white/60 max-w-2xl mx-auto mb-5 blockchain-line"
-              style={{ textShadow: '0 2px 15px rgba(0,0,0,0.5)' }}>
-              Every run, every crash, every record — immutably recorded on-chain.
-              True ownership. Verifiable scores. Real stakes.
+            <p className="text-lg sm:text-xl text-white/55 max-w-2xl mx-auto mb-6 mpp-line leading-relaxed"
+              style={{ fontFamily: "'Inter', system-ui", textShadow: '0 2px 15px rgba(0,0,0,0.5)' }}>
+              Machine Payment Protocol enables seamless in-game micro-transactions.
+              Every race, every upgrade, every reward — settled instantly on-chain.
             </p>
 
-            <div className="flex flex-wrap justify-center gap-4 blockchain-line">
+            <div className="flex flex-wrap justify-center gap-3 mpp-line">
               <div className="badge-pill">
-                <span className="badge-icon">🔗</span> EVM Compatible
+                <span className="badge-icon">⚡</span> Instant Settlements
               </div>
               <div className="badge-pill">
-                <span className="badge-icon">🏦</span> NFT Vehicles
+                <span className="badge-icon">🔗</span> On-Chain Verified
               </div>
               <div className="badge-pill">
-                <span className="badge-icon">💎</span> Token Rewards
+                <span className="badge-icon">🛡️</span> Zero Gas Fees
               </div>
             </div>
           </div>
         </div>
 
-        {/* ===== Scroll Layer: AI Agents ===== */}
+        {/* ===== Scroll Layer 2: MagicBlocks Private Transactions ===== */}
         <div
-          ref={aiLayerRef}
+          ref={magicblocksLayerRef}
           className="absolute inset-0 z-[5] flex flex-col items-center justify-center px-6 pointer-events-none"
           style={{ opacity: 0 }}
         >
           <div className="max-w-3xl text-center">
-            <div className="mb-3 ai-line">
+            <div className="mb-4 magicblocks-line">
+              <span className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-sm font-medium"
+                style={{
+                  background: 'rgba(53,242,255,0.1)',
+                  border: '1px solid rgba(53,242,255,0.3)',
+                  color: '#35f2ff',
+                  fontFamily: "'Space Grotesk', sans-serif",
+                }}
+              >
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
+                  <rect x="3" y="3" width="18" height="18" rx="3" />
+                  <path d="M3 9h18" />
+                  <path d="M9 3v18" />
+                </svg>
+                PRIVATE INFRASTRUCTURE
+              </span>
+            </div>
+
+            <h2
+              className="text-4xl sm:text-6xl md:text-7xl font-black mb-6 magicblocks-line font-heading"
+              style={{
+                fontFamily: "'Space Grotesk', 'Inter', sans-serif",
+                filter: 'drop-shadow(0 0 35px rgba(53,242,255,0.5))',
+              }}
+            >
+              <span className="text-gradient-animated" style={{
+                background: 'linear-gradient(90deg, #35f2ff, #6f42ff, #7dff72)',
+                backgroundSize: '200% auto',
+                WebkitBackgroundClip: 'text',
+                WebkitTextFillColor: 'transparent',
+              }}>
+                MAGICBLOCKS
+              </span>
+            </h2>
+
+            <p className="text-lg sm:text-xl text-white/55 max-w-2xl mx-auto mb-6 magicblocks-line leading-relaxed"
+              style={{ fontFamily: "'Inter', system-ui", textShadow: '0 2px 15px rgba(0,0,0,0.5)' }}>
+              Private transactions powered by MagicBlocks. Your gameplay data stays yours.
+              Encrypted race results, hidden strategies, confidential agent training.
+            </p>
+
+            <div className="flex flex-wrap justify-center gap-3 magicblocks-line">
+              <div className="badge-pill" style={{ background: 'rgba(53,242,255,0.06)', borderColor: 'rgba(53,242,255,0.2)' }}>
+                <span className="badge-icon">🔒</span> End-to-End Encrypted
+              </div>
+              <div className="badge-pill" style={{ background: 'rgba(53,242,255,0.06)', borderColor: 'rgba(53,242,255,0.2)' }}>
+                <span className="badge-icon">🧊</span> MagicBlocks Engine
+              </div>
+              <div className="badge-pill" style={{ background: 'rgba(53,242,255,0.06)', borderColor: 'rgba(53,242,255,0.2)' }}>
+                <span className="badge-icon">👁️</span> Zero-Knowledge Proofs
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* ===== Scroll Layer 3: AI Agents Can Play ===== */}
+        <div
+          ref={aiAgentsLayerRef}
+          className="absolute inset-0 z-[5] flex flex-col items-center justify-center px-6 pointer-events-none"
+          style={{ opacity: 0 }}
+        >
+          <div className="max-w-3xl text-center">
+            <div className="mb-4 ai-agents-line">
               <span className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-sm font-medium"
                 style={{
                   background: 'rgba(125,255,114,0.1)',
                   border: '1px solid rgba(125,255,114,0.3)',
                   color: '#7dff72',
-                  fontFamily: 'VT323, monospace',
+                  fontFamily: "'Space Grotesk', sans-serif",
                 }}
               >
                 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
-                  <path d="M12 2a4 4 0 0 1 4 4v2a4 4 0 0 1-8 0V6a4 4 0 0 1 4-4z" />
-                  <path d="M16 14H8a4 2 0 0 0-4 2v2h16v-2a4 2 0 0 0-4-2z" />
-                  <circle cx="18" cy="4" r="2" />
-                  <circle cx="6" cy="4" r="2" />
+                  <circle cx="12" cy="8" r="4" />
+                  <path d="M6 20v-2a6 6 0 0 1 12 0v2" />
+                  <path d="M16 4l2-2" />
+                  <path d="M8 4L6 2" />
                 </svg>
-                AI-POWERED AGENTS
+                AUTONOMOUS RACING
               </span>
             </div>
 
             <h2
-              className="text-4xl sm:text-6xl md:text-7xl font-black mb-6 ai-line"
+              className="text-4xl sm:text-6xl md:text-7xl font-black mb-6 ai-agents-line font-heading"
               style={{
-                fontFamily: 'ui-sans-serif, system-ui',
-                filter: 'drop-shadow(0 0 30px rgba(125,255,114,0.5))',
+                fontFamily: "'Space Grotesk', 'Inter', sans-serif",
+                filter: 'drop-shadow(0 0 35px rgba(125,255,114,0.5))',
               }}
             >
               <span className="text-gradient-animated" style={{
@@ -451,107 +509,42 @@ export function HeroCanvas() {
                 WebkitBackgroundClip: 'text',
                 WebkitTextFillColor: 'transparent',
               }}>
-                AI AGENTS PLAY 24/7
+                AI AGENTS PLAY
               </span>
             </h2>
 
-            <p className="text-lg sm:text-xl text-white/60 max-w-2xl mx-auto mb-5 ai-line"
-              style={{ textShadow: '0 2px 15px rgba(0,0,0,0.5)' }}>
-              Train autonomous AI agents to learn your track, master drifts,
-              and compete on the global leaderboard. Hire them or challenge them.
+            <p className="text-lg sm:text-xl text-white/55 max-w-2xl mx-auto mb-6 ai-agents-line leading-relaxed"
+              style={{ fontFamily: "'Inter', system-ui", textShadow: '0 2px 15px rgba(0,0,0,0.5)' }}>
+              Train autonomous AI agents that race 24/7 on your behalf.
+              They learn, adapt, and earn while you sleep. Your agent. Your strategy.
             </p>
 
-            <div className="flex flex-wrap justify-center gap-4 ai-line">
+            <div className="flex flex-wrap justify-center gap-3 ai-agents-line">
               <div className="badge-pill badge-green">
                 <span className="badge-icon">🧠</span> Self-Learning
               </div>
               <div className="badge-pill badge-green">
-                <span className="badge-icon">⚔️</span> Agent Vs Agent
+                <span className="badge-icon">⚔️</span> Agent vs Agent
               </div>
               <div className="badge-pill badge-green">
-                <span className="badge-icon">📊</span> Train & Deploy
+                <span className="badge-icon">💰</span> Earn 24/7
               </div>
             </div>
           </div>
         </div>
 
-        {/* ===== Scroll Layer: MPP Multiplayer ===== */}
+        {/* ===== Scroll Layer 4: Easy to Play (Grand CTA) ===== */}
         <div
-          ref={mppLayerRef}
-          className="absolute inset-0 z-[5] flex flex-col items-center justify-center px-6 pointer-events-none"
-          style={{ opacity: 0 }}
-        >
-          <div className="max-w-3xl text-center">
-            <div className="mb-3 mpp-line">
-              <span className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-sm font-medium"
-                style={{
-                  background: 'rgba(255,79,216,0.1)',
-                  border: '1px solid rgba(255,79,216,0.3)',
-                  color: '#ff4fd8',
-                  fontFamily: 'VT323, monospace',
-                }}
-              >
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
-                  <circle cx="12" cy="8" r="4" />
-                  <circle cx="5" cy="12" r="3" />
-                  <circle cx="19" cy="12" r="3" />
-                  <path d="M8 9l-1 13h10l-1-13" />
-                  <path d="M10 7l-3 3" />
-                  <path d="M14 7l3 3" />
-                </svg>
-                MULTI-PARTY PROTOCOL
-              </span>
-            </div>
-
-            <h2
-              className="text-4xl sm:text-6xl md:text-7xl font-black mb-6 mpp-line"
-              style={{
-                fontFamily: 'ui-sans-serif, system-ui',
-                filter: 'drop-shadow(0 0 30px rgba(255,79,216,0.5))',
-              }}
-            >
-              <span className="text-gradient-animated" style={{
-                background: 'linear-gradient(90deg, #ff4fd8, #ff9966, #6f42ff)',
-                backgroundSize: '200% auto',
-                WebkitBackgroundClip: 'text',
-                WebkitTextFillColor: 'transparent',
-              }}>
-                RACE TOGETHER
-              </span>
-            </h2>
-
-            <p className="text-lg sm:text-xl text-white/60 max-w-2xl mx-auto mb-5 mpp-line"
-              style={{ textShadow: '0 2px 15px rgba(0,0,0,0.5)' }}>
-              Multi-Party Protocol enables real-time multiplayer races with
-              on-chain state synchronization. 8 players, zero lag, pure chaos.
-            </p>
-
-            <div className="flex flex-wrap justify-center gap-4 mpp-line">
-              <div className="badge-pill badge-pink">
-                <span className="badge-icon">👥</span> Up to 8 Players
-              </div>
-              <div className="badge-pill badge-pink">
-                <span className="badge-icon">🌐</span> Decentralized Servers
-              </div>
-              <div className="badge-pill badge-pink">
-                <span className="badge-icon">🏆</span> Global Ladder
-              </div>
-            </div>
-          </div>
-        </div>
-
-        {/* ===== Scroll Layer: Grand CTA Final ===== */}
-        <div
-          ref={ctaLayerRef}
+          ref={easyPlayLayerRef}
           className="absolute inset-0 z-[5] flex flex-col items-center justify-center px-6 pointer-events-none"
           style={{ opacity: 0 }}
         >
           <div className="max-w-4xl text-center">
             <h2
-              className="text-5xl sm:text-7xl md:text-8xl lg:text-9xl font-black mb-4 cta-subtitle"
+              className="text-5xl sm:text-7xl md:text-8xl lg:text-9xl font-black mb-5 cta-subtitle font-heading"
               style={{
-                fontFamily: 'ui-sans-serif, system-ui',
-                filter: 'drop-shadow(0 0 50px rgba(255,79,216,0.6)) drop-shadow(0 0 100px rgba(111,66,255,0.4))',
+                fontFamily: "'Space Grotesk', 'Inter', sans-serif",
+                filter: 'drop-shadow(0 0 50px rgba(255,79,216,0.5)) drop-shadow(0 0 100px rgba(111,66,255,0.3))',
                 background: 'linear-gradient(90deg, #ff4fd8, #6f42ff, #35f2ff, #ff9966, #ff4fd8)',
                 backgroundSize: '200% auto',
                 WebkitBackgroundClip: 'text',
@@ -559,15 +552,15 @@ export function HeroCanvas() {
                 animation: 'gradient-shift 4s linear infinite',
               }}
             >
-              READY?
+              EASY TO PLAY
             </h2>
 
-            <p className="text-lg sm:text-xl text-white/50 max-w-xl mx-auto mb-4 cta-subtitle"
-              style={{ textShadow: '0 2px 15px rgba(0,0,0,0.5)' }}>
-              Connect your wallet. Pick your agent. Hit the road.
+            <p className="text-lg sm:text-xl text-white/50 max-w-xl mx-auto mb-5 cta-subtitle"
+              style={{ fontFamily: "'Inter', system-ui", textShadow: '0 2px 15px rgba(0,0,0,0.5)' }}>
+              No complex setup. No steep learning curve. Jump in, race, and earn.
             </p>
 
-            <div className="flex flex-col items-center gap-3 mb-6">
+            <div className="flex flex-col items-center gap-3 mb-8">
               <div className="w-24 h-[1px] cta-divider" style={{
                 background: 'linear-gradient(90deg, transparent, #ff4fd8, transparent)',
               }} />
@@ -584,7 +577,7 @@ export function HeroCanvas() {
                 <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
                   <polygon points="8,5 20,12 8,19" />
                 </svg>
-                <span>START ENGINE</span>
+                <span>START PLAYING</span>
               </button>
               <button className="btn-outline btn-large">
                 <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
@@ -604,10 +597,10 @@ export function HeroCanvas() {
           className="absolute bottom-8 left-1/2 z-[5] flex flex-col items-center gap-2"
           style={{ transform: 'translateX(-50%)', animation: 'scroll-bounce-anim 2s ease-in-out infinite', opacity: 0 }}
         >
-          <span className="font-mono text-xs text-white/60 tracking-[0.3em]" style={{ textShadow: '0 1px 8px rgba(0,0,0,0.8)' }}>
+          <span className="text-xs text-white/50 tracking-[0.3em] font-medium" style={{ fontFamily: "'Space Grotesk', sans-serif", textShadow: '0 1px 8px rgba(0,0,0,0.8)' }}>
             SCROLL TO EXPLORE
           </span>
-          <svg width="20" height="24" viewBox="0 0 20 24" fill="none" stroke="rgba(53,242,255,0.6)" strokeWidth="1.5">
+          <svg width="20" height="24" viewBox="0 0 20 24" fill="none" stroke="rgba(53,242,255,0.5)" strokeWidth="1.5">
             <path d="M5 9l5 5 5-5" />
           </svg>
         </div>
