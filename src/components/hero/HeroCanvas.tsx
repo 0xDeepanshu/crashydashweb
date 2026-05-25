@@ -346,15 +346,7 @@ export function HeroCanvas() {
             className="flex flex-wrap items-center justify-center gap-4 pointer-events-auto"
             style={{ opacity: 0, transform: 'translateY(30px) scale(0.9)' }}
           >
-            <button className="btn-neon"><span>PLAY NOW</span></button>
-            <button className="btn-outline btn-wallet">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                <rect x="2" y="6" width="20" height="14" rx="2" />
-                <path d="M2 10h20" />
-                <circle cx="17" cy="15" r="1.5" fill="currentColor" />
-              </svg>
-              <span>CONNECT WALLET</span>
-            </button>
+            <a href="https://x.com/0xUgly/status/2058998357671231974?s=20" target="_blank" rel="noopener noreferrer" className="btn-neon"><span>PLAY NOW</span></a>
           </div>
         </div>
 
@@ -560,20 +552,12 @@ export function HeroCanvas() {
             </div>
 
             <div className="flex flex-wrap items-center justify-center gap-4 pointer-events-auto cta-buttons">
-              <button className="btn-neon btn-large">
+              <a href="https://x.com/0xUgly/status/2058998357671231974?s=20" target="_blank" rel="noopener noreferrer" className="btn-neon btn-large">
                 <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
                   <polygon points="8,5 20,12 8,19" />
                 </svg>
                 <span>START PLAYING</span>
-              </button>
-              <button className="btn-outline btn-large">
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                  <rect x="2" y="6" width="20" height="14" rx="2" />
-                  <path d="M2 10h20" />
-                  <circle cx="17" cy="15" r="1.5" fill="currentColor" />
-                </svg>
-                <span>CONNECT WALLET</span>
-              </button>
+              </a>
             </div>
           </div>
         </div>

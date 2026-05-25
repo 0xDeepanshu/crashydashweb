@@ -13,6 +13,7 @@ const WORLDS = [
     gradient: 'linear-gradient(135deg, #1a0030, #ff4f38)',
     accent: '#ff4fd8',
     emoji: '🏜️',
+    comingSoon: false,
   },
   {
     name: 'CYBER CITY',
@@ -20,6 +21,7 @@ const WORLDS = [
     gradient: 'linear-gradient(135deg, #0a0018, #6f42ff)',
     accent: '#35f2ff',
     emoji: '🌃',
+    comingSoon: true,
   },
   {
     name: 'MIDNIGHT HIGHWAY',
@@ -27,6 +29,7 @@ const WORLDS = [
     gradient: 'linear-gradient(135deg, #07010f, #35f2ff)',
     accent: '#ffffff',
     emoji: '🌌',
+    comingSoon: true,
   },
   {
     name: 'LAVA CANYON',
@@ -34,6 +37,7 @@ const WORLDS = [
     gradient: 'linear-gradient(135deg, #1a0000, #ff6b35)',
     accent: '#ff9966',
     emoji: '🌋',
+    comingSoon: true,
   },
 ];
 
@@ -167,16 +171,16 @@ export function WorldsSection() {
           <div
             key={w.name}
             ref={el => { cardRefs.current[i] = el; }}
-            className="world-card relative rounded-2xl overflow-hidden cursor-pointer"
+            className={`world-card relative rounded-2xl overflow-hidden ${w.comingSoon ? 'cursor-default' : 'cursor-pointer'}`}
             style={{
               aspectRatio: '3/4',
-              border: `1px solid ${w.accent}15`,
+              border: `1px solid ${w.comingSoon ? w.accent + '08' : w.accent + '15'}`,
               willChange: 'transform',
               transformStyle: 'preserve-3d',
             }}
           >
             {/* Gradient background */}
-            <div className="absolute inset-0" style={{ background: w.gradient }} />
+            <div className="absolute inset-0" style={{ background: w.gradient, filter: w.comingSoon ? 'brightness(0.4) saturate(0.3)' : undefined }} />
 
             {/* Decorative radial glow */}
             <div
@@ -188,25 +192,59 @@ export function WorldsSection() {
             <div className="absolute inset-0 flex items-center justify-center">
               <span
                 className="world-emoji text-7xl sm:text-8xl"
-                style={{ filter: `drop-shadow(0 0 30px ${w.accent}40)`, willChange: 'transform' }}
+                style={{ filter: `drop-shadow(0 0 30px ${w.accent}40)${w.comingSoon ? ' blur(2px) grayscale(0.5)' : ''}`, willChange: 'transform', opacity: w.comingSoon ? 0.4 : 1 }}
               >
                 {w.emoji}
               </span>
             </div>
 
+            {/* Coming Soon overlay */}
+            {w.comingSoon && (
+              <div className="absolute inset-0 z-10 flex flex-col items-center justify-center">
+                <div className="relative">
+                  {/* Animated ring */}
+                  <div
+                    className="absolute -inset-4 rounded-full opacity-40"
+                    style={{
+                      border: `2px solid ${w.accent}`,
+                      animation: 'pulse 2s ease-in-out infinite',
+                    }}
+                  />
+                  {/* Lock icon */}
+                  <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke={w.accent} strokeWidth="1.5" style={{ opacity: 0.7 }}>
+                    <rect x="3" y="11" width="18" height="11" rx="2" />
+                    <path d="M7 11V7a5 5 0 0 1 10 0v4" />
+                  </svg>
+                </div>
+                <span
+                  className="mt-4 text-xs font-bold tracking-[0.25em] uppercase"
+                  style={{
+                    color: w.accent,
+                    opacity: 0.7,
+                    fontFamily: "'Space Grotesk', sans-serif",
+                    textShadow: `0 0 20px ${w.accent}40`,
+                  }}
+                >
+                  Coming Soon
+                </span>
+              </div>
+            )}
+
             {/* Bottom info */}
             <div className="world-info absolute bottom-0 left-0 right-0 p-5" style={{ background: 'linear-gradient(to top, rgba(7,1,15,0.9) 0%, transparent 100%)' }}>
               <h3 className="text-base font-bold text-white tracking-wide mb-1 font-heading"
-                  style={{ fontFamily: "'Space Grotesk', sans-serif" }}>{w.name}</h3>
+                  style={{ fontFamily: "'Space Grotesk', sans-serif", opacity: w.comingSoon ? 0.5 : 1 }}>{w.name}</h3>
               <p className="text-white/35 text-xs font-light"
-                 style={{ fontFamily: "'Inter', system-ui" }}>{w.subtitle}</p>
+                 style={{ fontFamily: "'Inter', system-ui", opacity: w.comingSoon ? 0.4 : 1 }}>{w.subtitle}</p>
             </div>
 
             {/* Hover glow */}
-            <div
-              className="absolute inset-0 rounded-2xl opacity-0 hover:opacity-100 transition-opacity duration-300 pointer-events-none"
-              style={{ boxShadow: `inset 0 0 40px ${w.accent}15, 0 0 25px ${w.accent}08` }}
-            />
+            {!w.comingSoon && (
+              <div
+                className="absolute inset-0 rounded-2xl opacity-0 hover:opacity-100 transition-opacity duration-300 pointer-events-none"
+                style={{ boxShadow: `inset 0 0 40px ${w.accent}15, 0 0 25px ${w.accent}08` }}
+              />
+            )}
           </div>
         ))}
       </div>

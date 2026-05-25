@@ -7,7 +7,7 @@ import { BlockchainSection } from '@/components/BlockchainSection';
 import { AIAgentsSection } from '@/components/AIAgentsSection';
 import { WorldsSection } from '@/components/worlds/WorldsSection';
 import { Footer } from '@/components/Footer';
-
+import XPlayerCardSection from '@/components/XPlayerCardSection';
 export default function Home() {
   return (
     <SmoothScroll>
@@ -18,14 +18,12 @@ export default function Home() {
         {/* Hero: pinned frame-scroll + scroll-driven text layers */}
         <HeroCanvas />
 
-        {/* Features: the pillars of the game */}
-        <FeaturesSection />
+        <XPlayerCardSection />
 
         {/* Section divider */}
         <div className="section-divider" />
 
-        {/* Blockchain: on-chain gameplay */}
-        <BlockchainSection />
+
 
         {/* AI Agents: train, deploy, earn */}
         <AIAgentsSection />

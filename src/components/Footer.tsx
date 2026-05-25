@@ -56,14 +56,19 @@ export function Footer() {
           Blockchain-native voxel racing with AI agents. Own. Race. Earn.
         </p>
 
-        <div className="flex flex-wrap justify-center gap-8 text-sm text-white/40 mb-10"
-             style={{ fontFamily: "'Space Grotesk', sans-serif", fontWeight: 500 }}>
-          <a href="#" className="footer-link hover:text-neon-pink transition-colors duration-300">Discord</a>
-          <a href="#" className="footer-link hover:text-neon-cyan transition-colors duration-300">Twitter</a>
-          <a href="#" className="footer-link hover:text-synth-purple transition-colors duration-300">Whitepaper</a>
-          <a href="#" className="footer-link hover:text-synth-orange transition-colors duration-300">Community</a>
-          <a href="#" className="footer-link hover:text-neon-cyan transition-colors duration-300">Docs</a>
-          <a href="#" className="footer-link hover:text-neon-pink transition-colors duration-300">GitHub</a>
+        <div className="flex justify-center mb-10">
+          <a
+            href="https://x.com/0xUgly/status/2058998357671231974?s=20"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="footer-link inline-flex items-center gap-2.5 px-6 py-2.5 rounded-full text-sm text-white/50 hover:text-white transition-all duration-300 border border-white/8 hover:border-white/20 hover:bg-white/5"
+            style={{ fontFamily: "'Space Grotesk', sans-serif", fontWeight: 500 }}
+          >
+            <svg className="w-5 h-5" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
+            </svg>
+            Follow on X
+          </a>
         </div>
 
         <div className="text-white/15 text-xs" style={{ fontFamily: "'JetBrains Mono', monospace" }}>
