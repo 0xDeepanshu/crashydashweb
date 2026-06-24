@@ -7,10 +7,10 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 gsap.registerPlugin(ScrollTrigger);
 
 const STEPS = [
-  { num: '01', title: 'CONNECT WALLET', desc: 'Link your wallet in one click — Phantom, MetaMask, or any EVM-compatible wallet.', icon: '🔗' },
-  { num: '02', title: 'TRAIN AGENT', desc: 'Your AI agent learns via reinforcement learning through thousands of autonomous runs.', icon: '🧠' },
-  { num: '03', title: 'DEPLOY & RACE', desc: 'Send it into live races. AI agents compete 24/7 on tracks worldwide.', icon: '⚔️' },
-  { num: '04', title: 'EARN REWARDS', desc: 'Win races, collect tokens via MPP, and earn from private MagicBlocks transactions.', icon: '💰' },
+  { num: '01', title: 'CONNECT WALLET', desc: 'Link your wallet in one click — Phantom, MetaMask, or any EVM-compatible wallet.' },
+  { num: '02', title: 'TRAIN AGENT', desc: 'Your AI agent learns via reinforcement learning through thousands of autonomous runs.' },
+  { num: '03', title: 'DEPLOY & RACE', desc: 'Send it into live races. AI agents compete 24/7 on tracks worldwide.' },
+  { num: '04', title: 'EARN REWARDS', desc: 'Win races, collect tokens via MPP, and earn from private MagicBlocks transactions.' },
 ];
 
 export function AIAgentsSection() {
@@ -108,7 +108,7 @@ export function AIAgentsSection() {
             AI <span style={{ color: '#7dff72', textShadow: '0 0 30px rgba(125,255,114,0.5)' }}>AGENTS</span>
           </h2>
           <p className="mt-5 text-lg text-white/40 font-light max-w-xl mx-auto leading-relaxed"
-             style={{ fontFamily: "'Inter', system-ui" }}>
+            style={{ fontFamily: "'Inter', system-ui" }}>
             Train, deploy, and earn with autonomous AI agents that race on your behalf.
           </p>
         </div>
@@ -124,7 +124,7 @@ export function AIAgentsSection() {
                 </div>
               )}
 
-              <div className="panel-glass p-7" style={{ borderColor: 'rgba(125,255,114,0.1)' }}>
+              <div className="panel-glass p-7 h-full" style={{ borderColor: 'rgba(125,255,114,0.1)' }}>
                 <div className="agent-step-num inline-flex items-center justify-center rounded-full mb-5"
                   style={{
                     width: '48px',
@@ -140,11 +140,10 @@ export function AIAgentsSection() {
                   {step.num}
                 </div>
 
-                <div className="text-3xl mb-4">{step.icon}</div>
                 <h3 className="text-base font-bold text-white tracking-wide mb-2 font-heading"
-                    style={{ fontFamily: "'Space Grotesk', sans-serif" }}>{step.title}</h3>
+                  style={{ fontFamily: "'Space Grotesk', sans-serif" }}>{step.title}</h3>
                 <p className="text-white/40 text-sm leading-relaxed"
-                   style={{ fontFamily: "'Inter', system-ui" }}>{step.desc}</p>
+                  style={{ fontFamily: "'Inter', system-ui" }}>{step.desc}</p>
               </div>
             </div>
           ))}

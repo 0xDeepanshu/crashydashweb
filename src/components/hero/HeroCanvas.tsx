@@ -145,72 +145,73 @@ export function HeroCanvas() {
       });
 
       // Phase 1 (0–0.08): Hide scroll hint, vignette intensifies — Dark Frame Rule
-      tl.to(scrollHintRef.current!, { opacity: 0, duration: 0.06 }, 0);
+      tl.fromTo(scrollHintRef.current!, { opacity: 0.7 }, { opacity: 0, duration: 0.06 }, 0);
       tl.fromTo(vignetteRef.current!,
         { opacity: 0.3 },
         { opacity: 0.85, duration: 0.5 },
         0.05,
       );
 
-      // Phase 2 (0.06–0.18): Initial title/tagline exit
-      tl.to(contentRef.current!, {
-        opacity: 0, y: -100, scale: 0.85,
-        duration: 0.12, ease: 'power3.in',
-      }, 0.06);
+      // Phase 2 (0.06–0.18): Initial title/tagline exit — uses fromTo so scrub reverses properly
+      tl.fromTo(contentRef.current!,
+        { opacity: 1, y: 0, scale: 1 },
+        { opacity: 0, y: -100, scale: 0.85, duration: 0.12, ease: 'power3.in' },
+        0.06,
+      );
 
       const titleChars = titleRef.current?.querySelectorAll('.hero-char');
       if (titleChars?.length) {
-        tl.to(titleChars, {
-          opacity: 0, y: -50, rotationX: 45, scale: 0.7,
-          duration: 0.1, stagger: 0.005, ease: 'power2.in',
-        }, 0.08);
+        tl.fromTo(titleChars,
+          { opacity: 1, y: 0, rotationX: 0, scale: 1 },
+          { opacity: 0, y: -50, rotationX: 45, scale: 0.7, duration: 0.1, stagger: 0.005, ease: 'power2.in' },
+          0.08,
+        );
       }
 
-      // ===== Layer 1: MPP (Machine Payment Protocol) =====
-      tl.fromTo(mppLayerRef.current!,
+      // ===== Layer 1: AI Agents =====
+      tl.fromTo(aiAgentsLayerRef.current!,
         { y: 100, opacity: 0, scale: 0.9 },
         { y: 0, opacity: 1, scale: 1, duration: 0.12, ease: 'power3.out' },
         0.20,
       );
-      tl.fromTo('.mpp-line',
+      tl.fromTo('.ai-agents-line',
         { y: 40, opacity: 0 },
         { y: 0, opacity: 1, stagger: 0.04, duration: 0.08, ease: 'power2.out' },
         0.23,
       );
-      tl.to(mppLayerRef.current!, {
+      tl.to(aiAgentsLayerRef.current!, {
         y: -80, opacity: 0, scale: 0.88,
         duration: 0.1, ease: 'power3.in',
       }, 0.36);
 
-      // ===== Layer 2: MagicBlocks Private Transactions =====
-      tl.fromTo(magicblocksLayerRef.current!,
+      // ===== Layer 2: MPP (Machine Payment Protocol) =====
+      tl.fromTo(mppLayerRef.current!,
         { y: 100, opacity: 0, scale: 0.9 },
         { y: 0, opacity: 1, scale: 1, duration: 0.12, ease: 'power3.out' },
         0.40,
       );
-      tl.fromTo('.magicblocks-line',
+      tl.fromTo('.mpp-line',
         { y: 40, opacity: 0 },
         { y: 0, opacity: 1, stagger: 0.04, duration: 0.08, ease: 'power2.out' },
         0.43,
       );
-      tl.to(magicblocksLayerRef.current!, {
+      tl.to(mppLayerRef.current!, {
         y: -80, opacity: 0, scale: 0.88,
         duration: 0.1, ease: 'power3.in',
-      }, 0.54,
-      );
+      }, 0.54);
 
-      // ===== Layer 3: AI Agents Can Play =====
-      tl.fromTo(aiAgentsLayerRef.current!,
+      // ===== Layer 3: MagicBlocks Private Transactions =====
+      tl.fromTo(magicblocksLayerRef.current!,
         { y: 100, opacity: 0, scale: 0.9 },
         { y: 0, opacity: 1, scale: 1, duration: 0.12, ease: 'power3.out' },
         0.58,
       );
-      tl.fromTo('.ai-agents-line',
+      tl.fromTo('.magicblocks-line',
         { y: 40, opacity: 0 },
         { y: 0, opacity: 1, stagger: 0.04, duration: 0.08, ease: 'power2.out' },
         0.61,
       );
-      tl.to(aiAgentsLayerRef.current!, {
+      tl.to(magicblocksLayerRef.current!, {
         y: -80, opacity: 0, scale: 0.88,
         duration: 0.1, ease: 'power3.in',
       }, 0.72,
@@ -350,116 +351,7 @@ export function HeroCanvas() {
           </div>
         </div>
 
-        {/* ===== Scroll Layer 1: MPP (Machine Payment Protocol) ===== */}
-        <div
-          ref={mppLayerRef}
-          className="absolute inset-0 z-[5] flex flex-col items-center justify-center px-6 pointer-events-none"
-          style={{ opacity: 0 }}
-        >
-          <div className="max-w-3xl text-center">
-            <div className="mb-4 mpp-line">
-              <span className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-sm font-medium"
-                style={{
-                  background: 'rgba(111,66,255,0.12)',
-                  border: '1px solid rgba(111,66,255,0.35)',
-                  color: '#a78bfa',
-                  fontFamily: "'Space Grotesk', sans-serif",
-                }}
-              >
-                <span className="w-2 h-2 rounded-full bg-green-400 animate-pulse" />
-                MACHINE PAYMENT PROTOCOL
-              </span>
-            </div>
-
-            {/* Single Glow Word Rule: "MPP" is the accent word, rest is solid white */}
-            <h2
-              className="text-4xl sm:text-6xl md:text-7xl font-black mb-6 mpp-line font-heading text-white"
-              style={{
-                fontFamily: "'Space Grotesk', 'Inter', sans-serif",
-                textShadow: '0 2px 30px rgba(0,0,0,0.8)',
-              }}
-            >
-              <span style={{ color: '#6f42ff', textShadow: '0 0 30px rgba(111,66,255,0.5)' }}>MPP</span>{' '}PROTOCOL
-            </h2>
-
-            <p className="text-lg sm:text-xl text-white/65 max-w-2xl mx-auto mb-6 mpp-line leading-relaxed"
-              style={{ fontFamily: "'Inter', system-ui", textShadow: '0 2px 20px rgba(0,0,0,0.7), 0 0 30px rgba(0,0,0,0.3)' }}>
-              Machine Payment Protocol enables seamless in-game micro-transactions.
-              Every race, every upgrade, every reward settled instantly on-chain.
-            </p>
-
-            <div className="flex flex-wrap justify-center gap-3 mpp-line">
-              <div className="badge-pill">
-                <span className="badge-icon">⚡</span> Instant Settlements
-              </div>
-              <div className="badge-pill">
-                <span className="badge-icon">🔗</span> On-Chain Verified
-              </div>
-              <div className="badge-pill">
-                <span className="badge-icon">🛡️</span> Zero Gas Fees
-              </div>
-            </div>
-          </div>
-        </div>
-
-        {/* ===== Scroll Layer 2: MagicBlocks Private Transactions ===== */}
-        <div
-          ref={magicblocksLayerRef}
-          className="absolute inset-0 z-[5] flex flex-col items-center justify-center px-6 pointer-events-none"
-          style={{ opacity: 0 }}
-        >
-          <div className="max-w-3xl text-center">
-            <div className="mb-4 magicblocks-line">
-              <span className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-sm font-medium"
-                style={{
-                  background: 'rgba(53,242,255,0.1)',
-                  border: '1px solid rgba(53,242,255,0.3)',
-                  color: '#35f2ff',
-                  fontFamily: "'Space Grotesk', sans-serif",
-                }}
-              >
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
-                  <rect x="3" y="3" width="18" height="18" rx="3" />
-                  <path d="M3 9h18" />
-                  <path d="M9 3v18" />
-                </svg>
-                PRIVATE INFRASTRUCTURE
-              </span>
-            </div>
-
-            {/* Single Glow Word Rule: "MAGICBLOCKS" is the accent word */}
-            <h2
-              className="text-4xl sm:text-6xl md:text-7xl font-black mb-6 magicblocks-line font-heading text-white"
-              style={{
-                fontFamily: "'Space Grotesk', 'Inter', sans-serif",
-                textShadow: '0 2px 30px rgba(0,0,0,0.8)',
-              }}
-            >
-              PRIVATE{' '}<span style={{ color: '#35f2ff', textShadow: '0 0 30px rgba(53,242,255,0.5)' }}>BLOCKS</span>
-            </h2>
-
-            <p className="text-lg sm:text-xl text-white/65 max-w-2xl mx-auto mb-6 magicblocks-line leading-relaxed"
-              style={{ fontFamily: "'Inter', system-ui", textShadow: '0 2px 20px rgba(0,0,0,0.7), 0 0 30px rgba(0,0,0,0.3)' }}>
-              Private transactions powered by MagicBlocks. Your gameplay data stays yours.
-              Encrypted race results, hidden strategies, confidential agent training.
-            </p>
-
-            {/* Focus Funnel: badges at lower opacity than description */}
-            <div className="flex flex-wrap justify-center gap-3 magicblocks-line">
-              <div className="badge-pill" style={{ background: 'rgba(53,242,255,0.05)', borderColor: 'rgba(53,242,255,0.15)', color: 'rgba(224,208,255,0.8)' }}>
-                <span className="badge-icon">🔒</span> End-to-End Encrypted
-              </div>
-              <div className="badge-pill" style={{ background: 'rgba(53,242,255,0.05)', borderColor: 'rgba(53,242,255,0.15)', color: 'rgba(224,208,255,0.8)' }}>
-                <span className="badge-icon">🧊</span> MagicBlocks Engine
-              </div>
-              <div className="badge-pill" style={{ background: 'rgba(53,242,255,0.05)', borderColor: 'rgba(53,242,255,0.15)', color: 'rgba(224,208,255,0.8)' }}>
-                <span className="badge-icon">👁️</span> Zero-Knowledge Proofs
-              </div>
-            </div>
-          </div>
-        </div>
-
-        {/* ===== Scroll Layer 3: AI Agents Can Play ===== */}
+        {/* ===== Scroll Layer 1: AI Agents ===== */}
         <div
           ref={aiAgentsLayerRef}
           className="absolute inset-0 z-[5] flex flex-col items-center justify-center px-6 pointer-events-none"
@@ -485,7 +377,6 @@ export function HeroCanvas() {
               </span>
             </div>
 
-            {/* Single Glow Word Rule: "AGENTS" is the accent word */}
             <h2
               className="text-4xl sm:text-6xl md:text-7xl font-black mb-6 ai-agents-line font-heading text-white"
               style={{
@@ -493,26 +384,97 @@ export function HeroCanvas() {
                 textShadow: '0 2px 30px rgba(0,0,0,0.8)',
               }}
             >
-              AI{' '}<span style={{ color: '#7dff72', textShadow: '0 0 30px rgba(125,255,114,0.5)' }}>AGENTS</span>{' '}PLAY
+              AI{' '}<span style={{ color: '#7dff72', textShadow: '0 0 30px rgba(125,255,114,0.5)' }}>AGENT</span>{' '}
             </h2>
 
-            <p className="text-lg sm:text-xl text-white/65 max-w-2xl mx-auto mb-6 ai-agents-line leading-relaxed"
-              style={{ fontFamily: "'Inter', system-ui", textShadow: '0 2px 20px rgba(0,0,0,0.7), 0 0 30px rgba(0,0,0,0.3)' }}>
-              Train autonomous AI agents that race 24/7 on your behalf.
-              They learn, adapt, and earn while you sleep. Your agent. Your strategy.
-            </p>
+            <ul className="text-left text-base sm:text-lg text-white/70 max-w-md mx-auto mb-6 ai-agents-line space-y-2"
+              style={{ fontFamily: "'Inter', system-ui", textShadow: '0 2px 20px rgba(0,0,0,0.7)', listStyle: 'none', padding: 0 }}>
+              <li className="flex items-center gap-3"><span className="text-white/40">•</span> Train your Agent</li>
+              <li className="flex items-center gap-3"><span className="text-white/40">•</span> Earn rewards 24/7</li>
+            </ul>
+          </div>
+        </div>
 
-            <div className="flex flex-wrap justify-center gap-3 ai-agents-line">
-              <div className="badge-pill badge-green">
-                <span className="badge-icon">🧠</span> Self-Learning
-              </div>
-              <div className="badge-pill badge-green">
-                <span className="badge-icon">⚔️</span> Agent vs Agent
-              </div>
-              <div className="badge-pill badge-green">
-                <span className="badge-icon">💰</span> Earn 24/7
-              </div>
+        {/* ===== Scroll Layer 2: MPP (Machine Payment Protocol) ===== */}
+        <div
+          ref={mppLayerRef}
+          className="absolute inset-0 z-[5] flex flex-col items-center justify-center px-6 pointer-events-none"
+          style={{ opacity: 0 }}
+        >
+          <div className="max-w-3xl text-center">
+            <div className="mb-4 mpp-line">
+              <span className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-sm font-medium"
+                style={{
+                  background: 'rgba(111,66,255,0.12)',
+                  border: '1px solid rgba(111,66,255,0.35)',
+                  color: '#a78bfa',
+                  fontFamily: "'Space Grotesk', sans-serif",
+                }}
+              >
+                <span className="w-2 h-2 rounded-full bg-green-400 animate-pulse" />
+                MACHINE PAYMENT PROTOCOL
+              </span>
             </div>
+
+            <h2
+              className="text-4xl sm:text-6xl md:text-7xl font-black mb-6 mpp-line font-heading text-white"
+              style={{
+                fontFamily: "'Space Grotesk', 'Inter', sans-serif",
+                textShadow: '0 2px 30px rgba(0,0,0,0.8)',
+              }}
+            >
+              <span style={{ color: '#6f42ff', textShadow: '0 0 30px rgba(111,66,255,0.5)' }}>MPP</span>{' '}PROTOCOL
+            </h2>
+
+            <ul className="text-left text-base sm:text-lg text-white/70 max-w-md mx-auto mb-6 mpp-line space-y-2"
+              style={{ fontFamily: "'Inter', system-ui", textShadow: '0 2px 20px rgba(0,0,0,0.7)', listStyle: 'none', padding: 0 }}>
+              <li className="flex items-center gap-3"><span className="text-white/40">•</span> Instant in-game micro-transactions</li>
+              <li className="flex items-center gap-3"><span className="text-white/40">•</span> Every race & reward settled on-chain</li>
+              <li className="flex items-center gap-3"><span className="text-white/40">•</span> Zero gas fees for players</li>
+            </ul>
+          </div>
+        </div>
+
+        {/* ===== Scroll Layer 3: MagicBlocks Private Transactions ===== */}
+        <div
+          ref={magicblocksLayerRef}
+          className="absolute inset-0 z-[5] flex flex-col items-center justify-center px-6 pointer-events-none"
+          style={{ opacity: 0 }}
+        >
+          <div className="max-w-3xl text-center">
+            <div className="mb-4 magicblocks-line">
+              <span className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-sm font-medium"
+                style={{
+                  background: 'rgba(53,242,255,0.1)',
+                  border: '1px solid rgba(53,242,255,0.3)',
+                  color: '#35f2ff',
+                  fontFamily: "'Space Grotesk', sans-serif",
+                }}
+              >
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
+                  <rect x="3" y="3" width="18" height="18" rx="3" />
+                  <path d="M3 9h18" />
+                  <path d="M9 3v18" />
+                </svg>
+                PRIVATE INFRASTRUCTURE
+              </span>
+            </div>
+
+            <h2
+              className="text-4xl sm:text-6xl md:text-7xl font-black mb-6 magicblocks-line font-heading text-white"
+              style={{
+                fontFamily: "'Space Grotesk', 'Inter', sans-serif",
+                textShadow: '0 2px 30px rgba(0,0,0,0.8)',
+              }}
+            >
+              PRIVATE{' '}<span style={{ color: '#35f2ff', textShadow: '0 0 30px rgba(53,242,255,0.5)' }}>BLOCKS</span>
+            </h2>
+
+            <ul className="text-left text-base sm:text-lg text-white/70 max-w-md mx-auto mb-6 magicblocks-line space-y-2"
+              style={{ fontFamily: "'Inter', system-ui", textShadow: '0 2px 20px rgba(0,0,0,0.7)', listStyle: 'none', padding: 0 }}>
+              <li className="flex items-center gap-3"><span className="text-white/40">•</span> Your gameplay data stays private</li>
+              <li className="flex items-center gap-3"><span className="text-white/40">•</span> Powered by MagicBlocks SDK</li>
+            </ul>
           </div>
         </div>
 

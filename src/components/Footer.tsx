@@ -17,7 +17,8 @@ export function Footer() {
     const ctx = gsap.context(() => {
       gsap.fromTo(logoRef.current,
         { opacity: 0, y: 40, scale: 0.9 },
-        { opacity: 1, y: 0, scale: 1, duration: 0.9, ease: 'power3.out',
+        {
+          opacity: 1, y: 0, scale: 1, duration: 0.9, ease: 'power3.out',
           scrollTrigger: { trigger: section, start: 'top 88%', toggleActions: 'play none none reverse' },
         },
       );
@@ -48,17 +49,14 @@ export function Footer() {
             WebkitTextFillColor: 'transparent',
             fontFamily: "'Space Grotesk', 'Inter', sans-serif",
           }}>
-            CRASHY DASH
+            CRASH DASH
           </span>
         </h3>
-        <p className="text-white/35 text-sm font-light mb-10 leading-relaxed"
-           style={{ fontFamily: "'Inter', system-ui" }}>
-          Blockchain-native voxel racing with AI agents. Own. Race. Earn.
-        </p>
+
 
         <div className="flex justify-center mb-10">
           <a
-            href="https://x.com/0xUgly/status/2058998357671231974?s=20"
+            href="https://x.com/intent/tweet?text=Stack%20blocks.%20Beat%20your%20friends.%20Earn%20onchain.%20%F0%9F%8E%AE%E2%9A%A1%0A%0APlay%20directly%20in%20your%20feed%20%F0%9F%91%87%0Ahttps%3A%2F%2Fstackmon.fun"
             target="_blank"
             rel="noopener noreferrer"
             className="footer-link inline-flex items-center gap-2.5 px-6 py-2.5 rounded-full text-sm text-white/50 hover:text-white transition-all duration-300 border border-white/8 hover:border-white/20 hover:bg-white/5"
@@ -67,14 +65,13 @@ export function Footer() {
             <svg className="w-5 h-5" viewBox="0 0 24 24" fill="currentColor">
               <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
             </svg>
-            Follow on X
+            Post & Play
           </a>
         </div>
 
-        <div className="text-white/15 text-xs" style={{ fontFamily: "'JetBrains Mono', monospace" }}>
-          &copy; 2026 CRASHY DASH. All rights reserved.
-        </div>
+
       </div>
     </footer>
   );
 }
+

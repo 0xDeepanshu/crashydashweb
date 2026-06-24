@@ -178,8 +178,8 @@ export default function XPlayerCardSection() {
           </div>
 
           <h2 className="xpc-heading text-3xl md:text-5xl lg:text-6xl font-bold mb-6 tracking-tight leading-tight">
-            Post a Link.<br />
-            <span className="gradient-text">Launch a Game.</span>
+            Post & Play.<br />
+
           </h2>
 
           <p className="xpc-subtext text-foreground-muted text-lg md:text-xl max-w-2xl mx-auto leading-relaxed">
@@ -234,7 +234,7 @@ export default function XPlayerCardSection() {
               {/* Tweet text */}
               <div className="px-5 pb-4">
                 <p className="text-sm text-foreground leading-relaxed">
-                  Dodge. Drift. Survive. Earn onchain. 🎮⚡<br />
+                  Dodge. Drift. Survive. Earn onchain.<br />
                   Play directly in your feed 👇<br />
                   <span className="text-primary-light">crashdash.xyz</span>
                 </p>
@@ -323,15 +323,15 @@ export default function XPlayerCardSection() {
               <div className="flex items-center justify-between px-5 py-3 border-t border-white/5">
                 <button className="flex items-center gap-1.5 text-foreground-muted/50 hover:text-primary-light transition-colors text-xs group/btn">
                   <ChatIcon className="w-4 h-4 group-hover/btn:scale-110 transition-transform" />
-                  <span>247</span>
+                  <span></span>
                 </button>
                 <button className="flex items-center gap-1.5 text-foreground-muted/50 hover:text-secondary transition-colors text-xs group/btn">
                   <RetweetIcon className="w-4 h-4 group-hover/btn:scale-110 transition-transform" />
-                  <span>1.2K</span>
+                  <span></span>
                 </button>
                 <button className="flex items-center gap-1.5 text-foreground-muted/50 hover:text-accent transition-colors text-xs group/btn">
                   <HeartIcon className="w-4 h-4 group-hover/btn:scale-110 transition-transform" />
-                  <span>4.8K</span>
+                  <span></span>
                 </button>
                 <button className="flex items-center gap-1.5 text-foreground-muted/50 hover:text-primary-light transition-colors text-xs group/btn">
                   <ShareIcon className="w-4 h-4 group-hover/btn:scale-110 transition-transform" />
